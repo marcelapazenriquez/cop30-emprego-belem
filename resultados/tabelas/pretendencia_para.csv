@@ -1,0 +1,4 @@
+variavel,media_pre_belem,p_media_pre,rmspe_pre_belem,rmspe_pos_belem,razao_belem,p_razao,unidades
+saldo_norm,11.41,0.538,24.83,30.54,1.23,0.269,26
+saldo_norm_55,6.33,0.846,29.16,122.51,4.2,0.038,26
+saldo_norm_56,16.07,0.615,35.68,29.12,0.82,0.769,26

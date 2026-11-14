@@ -1,0 +1,13 @@
+setor,fase,admissoes,pct_adm_prazo,pct_desl_fim_contr,pct_adm_interm,salario_medio_adm
+Alimentação (56),referencia,18266,0,15.4,1.3,1343
+Alimentação (56),prep,12622,0,16.7,0.9,1535
+Alimentação (56),evento,1024,0,27,0.7,1722
+Alimentação (56),desmob,6838,0,18.4,1.5,1666
+Alojamento (55),referencia,2133,0,14.2,0.1,1367
+Alojamento (55),prep,2012,0,15.7,0.4,1715
+Alojamento (55),evento,293,0,41.9,0,1886
+Alojamento (55),desmob,776,0,15.1,0,1809
+Alojamento + Alimentação,referencia,20399,0,15.3,1.2,1346
+Alojamento + Alimentação,prep,14634,0,16.6,0.8,1558
+Alojamento + Alimentação,evento,1317,0,30,0.5,1757
+Alojamento + Alimentação,desmob,7614,0,17.9,1.4,1680

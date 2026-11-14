@@ -1,0 +1,36 @@
+\begin{table}
+\centering
+\begin{talltblr}[         %% tabularray outer open
+caption={Modelo A (descritivo): saldo normalizado por grupo, MQO com dummies de mês e tendência},
+note{}={* p \num{< 0.1}, ** p \num{< 0.05}, *** p \num{< 0.01}},
+note{ }={Erros-padrão de Newey-West entre parênteses.},
+note{  }={Sem grupo de comparação: os coeficientes descrevem antes e depois, não são efeito causal.},
+]                     %% tabularray outer close
+{                     %% tabularray inner open
+colspec={Q[]Q[]Q[]Q[]Q[]Q[]Q[]Q[]Q[]},
+hline{2}={1-9}{solid, black, 0.05em},
+hline{16}={1-9}{solid, black, 0.05em},
+hline{1}={1-9}{solid, black, 0.08em},
+hline{18}={1-9}{solid, black, 0.08em},
+column{2-9}={}{halign=c},
+column{1}={}{halign=l},
+}                     %% tabularray inner close
+& Belém - sem macro & Belém - com macro & RM (sem Belém) - sem macro & RM (sem Belém) - com macro & RM inteira - sem macro & RM inteira - com macro & Interior - sem macro & Interior - com macro \\
+Preparação & \num{-5.213} & \num{-4.643} & \num{-12.777}** & \num{-14.622}** & \num{-6.821} & \num{-6.764} & \num{7.442} & \num{6.669} \\
+& (\num{10.661}) & (\num{10.689}) & (\num{5.696}) & (\num{6.769}) & (\num{8.384}) & (\num{8.631}) & (\num{6.674}) & (\num{8.093}) \\
+Evento (nov/2025) & \num{10.460} & \num{12.559} & \num{-17.637}** & \num{-16.351}* & \num{4.488} & \num{6.414} & \num{21.964} & \num{20.417} \\
+& (\num{15.180}) & (\num{16.342}) & (\num{7.844}) & (\num{8.956}) & (\num{12.134}) & (\num{13.351}) & (\num{15.078}) & (\num{17.352}) \\
+Desmobilização & \num{-24.822}* & \num{-24.812} & \num{-18.880}* & \num{-20.943}* & \num{-23.559}* & \num{-23.989} & \num{17.910}** & \num{17.058} \\
+& (\num{14.156}) & (\num{16.942}) & (\num{10.108}) & (\num{11.507}) & (\num{11.938}) & (\num{15.075}) & (\num{8.793}) & (\num{10.261}) \\
+Var. \% IBC-Br (atividade nacional) &  & \num{-5.156} &  & \num{1.160} &  & \num{-3.813} &  & \num{0.508} \\
+&  & (\num{3.330}) &  & (\num{3.515}) &  & (\num{2.874}) &  & (\num{2.835}) \\
+Var. \% câmbio (R\$/US\$) &  & \num{-0.110} &  & \num{-0.854} &  & \num{-0.268} &  & \num{0.464} \\
+&  & (\num{1.190}) &  & (\num{0.687}) &  & (\num{0.895}) &  & (\num{1.145}) \\
+Var. Selic (p.p.) &  & \num{-3.638} &  & \num{35.742} &  & \num{4.733} &  & \num{-13.141} \\
+&  & (\num{33.088}) &  & (\num{25.498}) &  & (\num{28.288}) &  & (\num{17.583}) \\
+IPCA (\% no mês) &  & \num{-5.493} &  & \num{-6.078} &  & \num{-5.617} &  & \num{8.246} \\
+&  & (\num{11.774}) &  & (\num{7.284}) &  & (\num{8.787}) &  & (\num{7.858}) \\
+Num.Obs. & \num{55} & \num{55} & \num{55} & \num{55} & \num{55} & \num{55} & \num{55} & \num{55} \\
+R2 & \num{0.435} & \num{0.460} & \num{0.437} & \num{0.481} & \num{0.478} & \num{0.504} & \num{0.497} & \num{0.520} \\
+\end{talltblr}
+\end{table}

@@ -1,0 +1,252 @@
+% =====================================================================
+%  Atividade 3 - Revisão bibliográfica: abordagens teóricas
+%  Compilar no Overleaf com pdfLaTeX (padrão)
+% =====================================================================
+\documentclass[12pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[brazil]{babel}
+\addto\captionsbrazil{\renewcommand{\tablename}{Quadro}}
+
+\usepackage{mathptmx}
+\usepackage[top=3cm, left=3cm, bottom=2cm, right=2cm]{geometry}
+\usepackage{setspace}
+\onehalfspacing          % 1,5 linha (ABNT). Se passar de 3 páginas: \setstretch{1.15}
+\usepackage{indentfirst}
+\setlength{\parindent}{1.25cm}
+\usepackage{microtype}
+
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{titlesec}
+\titleformat{\section}{\normalfont\bfseries}{\thesection}{0.5em}{}
+\titleformat{\subsection}{\normalfont\bfseries\itshape}{\thesubsection}{0.5em}{}
+\titlespacing*{\section}{0pt}{10pt}{4pt}
+\titlespacing*{\subsection}{0pt}{6pt}{2pt}
+\usepackage[hidelinks]{hyperref}
+
+\newenvironment{referencias}{%
+  \section*{Referências}
+  \begin{singlespace}
+  \setlength{\parindent}{0pt}
+  \setlength{\parskip}{6pt}
+  \raggedright
+}{%
+  \end{singlespace}
+}
+
+\begin{document}
+
+\begin{center}
+  {\bfseries ATIVIDADE 3 -- REVISÃO BIBLIOGRÁFICA: ABORDAGENS TEÓRICAS\\
+  MEGAEVENTOS E EMPREGO EM ALOJAMENTO E ALIMENTAÇÃO NO PARÁ}\\[6pt]
+  Marcela Paz da Silva Enriquez
+\end{center}
+
+\section{Introdução}
+
+A COP30, realizada em Belém em novembro de 2025, foi um choque temporário e
+concentrado de demanda sobre a economia paraense. Os setores de Alojamento e
+Alimentação (divisões 55 e 56 da CNAE 2.0), que concentram o gasto de
+visitantes, são tomados como \textit{proxy} do núcleo das atividades
+turísticas. A pergunta da pesquisa é se, e em que magnitude, o fim do evento
+esteve associado a uma redução do saldo mensal de empregos formais nesses
+setores. Esta revisão apresenta as abordagens que explicam por que um evento
+afetaria o emprego, por que o efeito se concentraria na hospitalidade e por
+que seria temporário, e justifica o arcabouço adotado.
+
+\section{Abordagens teóricas possíveis}
+
+\subsection{Impacto econômico de megaeventos: promessas \textit{ex ante} e evidência \textit{ex post}}
+
+Estudos \textit{ex ante}, baseados em matrizes insumo-produto e
+multiplicadores, tendem a prever grandes ganhos; Crompton (1995) e Matheson
+(2009) mostram as fontes dessa superestimação. No Brasil, Domingues,
+Betarelli Junior e Magalhães (2011) projetaram alta de 0,5\% no emprego com a
+Copa de 2014. Os estudos \textit{ex post} raramente confirmam esses números.
+Hagn e Maennig (2009), comparando mês a mês o desemprego das 12 cidades-sede da
+Copa de 2006 com o de 63 cidades alemãs, não encontram efeito significativo, e
+observam que a cidade inteira pode ser uma unidade agregada demais para captar
+o choque. Mattei e Mello (2017) não encontram diferenças relevantes entre
+estados-sede e não sede da Copa de 2014. Os mecanismos recorrentes são a
+substituição do gasto local, o \textit{crowding out} de turistas regulares e o
+vazamento de renda para fora da região.
+
+\subsection{Efeitos setoriais, temporários e dependentes do contexto}
+
+Quando há efeito, ele é setorial e curto. Com dados mensais de 16 setores,
+Feddersen e Maennig (2013) encontram aumento do emprego em Atlanta apenas no
+mês das Olimpíadas de 1996, concentrado em comércio, alojamento e alimentação e
+entretenimento. Boto-García e Santana-Gallego (2025) confirmam, com métodos
+recentes, ganhos de emprego em serviços antes das Olimpíadas e Copas, que não
+persistem após o evento. O caso mais próximo da COP30 é um evento não
+esportivo: Bronzini, Mocetti e Mongardini (2019) mostram que o Jubileu de 2000
+elevou a taxa de emprego de Roma, com o ganho concentrado em construção,
+comércio e hotéis e restaurantes, sem efeito sobre o valor adicionado per
+capita nem sobre o turismo no longo prazo. O contexto também importa: Wan e
+Song (2019) encontram resultados distintos para Londres 2012 e para a Copa de
+2014 e a Rio 2016, e Kobierecki e Pierzgalski (2022) não identificam efeito
+sobre o crescimento das sedes entre 2010 e 2016.
+
+\subsection{Demanda derivada e ajuste do emprego}
+
+A demanda por trabalho deriva da demanda pelo serviço (HICKS, 1932): um hotel
+contrata porque vende diárias. O megaevento é, assim, um choque temporário de
+demanda; como as empresas contratam pela demanda esperada, as admissões
+antecipam o evento, e os desligamentos seguem a demanda realizada. Alemayehu e
+Tveteraas (2020) mostram, com dados diários de hotéis e restaurantes, que o
+emprego se ajusta à demanda com defasagem e de forma incompleta, sobretudo em
+alimentos e bebidas, o que sugere reações graduais, e não instantâneas, ao fim
+do evento.
+
+\subsection{Fluxos de emprego e rotatividade}
+
+O emprego resulta de fluxos simultâneos de criação e destruição de postos,
+muito maiores que a variação líquida (DAVIS; HALTIWANGER, 1992), que reagem a
+choques de demanda (MORTENSEN; PISSARIDES, 1994). Dogru \textit{et al.} (2023)
+mostram que a rotatividade na hospitalidade é a mais sensível ao ciclo da
+economia. Isso justifica analisar admissões e desligamentos mensais e
+controlar pela atividade econômica geral.
+
+\subsection{Legado e economia política urbana}
+
+Preuss (2007) analisa o legado de megaeventos em múltiplas dimensões, e Harvey
+(1989) interpreta-os como estratégia de empreendedorismo urbano, com ganhos
+concentrados e custos socializados. Essas abordagens enriquecem a
+interpretação, mas não geram hipóteses testáveis com dados mensais de emprego.
+
+\section{Escolha do arcabouço teórico}
+
+Adota-se como arcabouço principal a literatura \textit{ex post} sobre
+megaeventos (seções 2.1 e 2.2), microfundamentada pela demanda derivada (2.3)
+e pela abordagem de fluxos (2.4); a perspectiva de legado (2.5) entra na
+interpretação. A escolha se justifica pela adequação ao problema (efeito curto,
+setorial e medido em fluxos de emprego formal), pela testabilidade (hipóteses
+que se traduzem em um modelo com variáveis indicadoras para cada fase) e pelo
+descarte fundamentado das alternativas: os estudos \textit{ex ante}
+superestimam impactos, e a abordagem crítica opera na escala da governança
+urbana. O Quadro~\ref{tab:arcabouco} resume essa correspondência.
+
+\begin{table}[h]
+  \centering
+  \caption{Escolhas metodológicas e fundamentos teóricos}
+  \label{tab:arcabouco}
+  \small
+  \begin{tabularx}{\textwidth}{Xl}
+    \toprule
+    \textbf{Escolha metodológica} & \textbf{Fundamento teórico} \\
+    \midrule
+    Fases: preparação, evento e desmobilização & Megaeventos \textit{ex post} \\
+    Foco em Alojamento e Alimentação & Efeitos setoriais (FEDDERSEN; MAENNIG, 2013) \\
+    Controle pelo volume de serviços & Demanda derivada; Dogru \textit{et al.} (2023) \\
+    Saldo mensal de admissões e desligamentos & Fluxos de emprego e rotatividade \\
+    Pará e Região Metropolitana de Belém & Agregação espacial (HAGN; MAENNIG, 2009) \\
+    Comparação futura com outras capitais & Contrafactuais (BRONZINI \textit{et al.}, 2019) \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+\textbf{H1}: o saldo de empregos aumenta imediatamente antes e durante o
+evento. \textbf{H2}: controlados sazonalidade e volume de serviços, o saldo na
+desmobilização fica abaixo do período de referência. \textbf{H3}: os efeitos se
+concentram na Região Metropolitana de Belém e no alojamento.
+
+\section{Implicações para a base de dados e para as inferências}
+
+A base usa os microdados do Novo CAGED (admissões e desligamentos formais por
+subclasse CNAE e município, pelo mês de competência; BRASIL, 2023) e o índice
+de volume de serviços do Pará (IBGE, PMS), de janeiro de 2021 a julho de 2026.
+A série começa após a quebra do eSocial em 2020 (IPEA, 2020). Ela permite
+inferir se o saldo se desviou do padrão esperado em cada fase e onde o desvio
+foi maior, mas, sem grupo de controle, a inferência é de associação
+condicional. A literatura aponta o passo seguinte: construir um contrafactual
+com outras capitais, por diferenças em diferenças ou controle sintético, como
+em Hagn e Maennig (2009) e Bronzini, Mocetti e Mongardini (2019).
+
+\section{Lacuna e contribuição}
+
+Estudos quantitativos sobre eventos não esportivos são raros (BRONZINI;
+MOCETTI; MONGARDINI, 2019), e em levantamento preliminar não foram
+identificados estudos \textit{ex post} sobre o emprego local em conferências
+climáticas. A pesquisa contribui ao analisar a COP30 em uma cidade amazônica,
+com microdados mensais do emprego formal em um país em desenvolvimento.
+
+\begin{referencias}
+
+ALEMAYEHU, F. K.; TVETERAAS, S. L. Long-run labour flexibility in
+hospitality: a dynamic common correlated effects approach. \textbf{Tourism
+Economics}, v. 26, n. 4, p. 704-718, 2020.
+
+BOTO-GARCÍA, D.; SANTANA-GALLEGO, M. Old questions, new methods: revisiting
+the economic effects of hosting mega-sport events. \textbf{Tourism
+Management}, v. 113, 105324, 2025.
+
+BRASIL. Ministério do Trabalho e Emprego. \textbf{Portaria MTE nº 2.420, de
+10 de julho de 2023}. Anexo XV: metodologia do Novo CAGED. Brasília, 2023.
+
+BRONZINI, R.; MOCETTI, S.; MONGARDINI, M. \textbf{The economic effects of
+big events}: evidence from the Great Jubilee 2000 in Rome. Roma: Banca
+d'Italia, 2019. (Temi di discussione, n. 1208).
+
+CROMPTON, J. L. Economic impact analysis of sports facilities and events:
+eleven sources of misapplication. \textbf{Journal of Sport Management}, v. 9,
+n. 1, p. 14-35, 1995.
+
+DAVIS, S. J.; HALTIWANGER, J. Gross job creation, gross job destruction, and
+employment reallocation. \textbf{The Quarterly Journal of Economics}, v. 107,
+n. 3, p. 819-863, 1992.
+
+DOGRU, T.; McGINLEY, S.; SHARMA, A.; IŞIK, C.; HANKS, L. Employee turnover
+dynamics in the hospitality industry vs. the overall economy.
+\textbf{Tourism Management}, v. 99, 104783, 2023.
+
+DOMINGUES, E. P.; BETARELLI JUNIOR, A. A.; MAGALHÃES, A. S. Quanto vale o
+show? Impactos econômicos dos investimentos da Copa do Mundo 2014 no Brasil.
+\textbf{Estudos Econômicos}, v. 41, n. 2, p. 409-439, 2011.
+
+FEDDERSEN, A.; MAENNIG, W. Mega-events and sectoral employment: the case of
+the 1996 Olympic Games. \textbf{Contemporary Economic Policy}, v. 31, n. 3,
+p. 580-603, 2013.
+
+HAGN, F.; MAENNIG, W. Large sport events and unemployment: the case of the
+2006 soccer World Cup in Germany. \textbf{Applied Economics}, v. 41, n. 25,
+p. 3295-3302, 2009.
+
+HARVEY, D. From managerialism to entrepreneurialism: the transformation in
+urban governance in late capitalism. \textbf{Geografiska Annaler: Series B,
+Human Geography}, v. 71, n. 1, p. 3-17, 1989.
+
+HICKS, J. R. \textbf{The theory of wages}. London: Macmillan, 1932.
+
+IPEA. Substituição da captação dos dados do Caged pelo eSocial: implicações
+para as estatísticas do emprego formal. \textbf{Boletim Mercado de Trabalho:
+conjuntura e análise}, n. 69, 2020.
+
+KOBIERECKI, M. M.; PIERZGALSKI, M. Sports mega-events and economic growth: a
+synthetic control approach. \textbf{Journal of Sports Economics}, v. 23,
+n. 5, p. 567-597, 2022.
+
+MATHESON, V. A. Economic multipliers and mega-event analysis.
+\textbf{International Journal of Sport Finance}, v. 4, n. 1, p. 63-70, 2009.
+
+MATTEI, T. S.; MELLO, G. R. Copa do mundo de futebol 2014: análise do
+impacto da receita e volume de vendas do comércio, dos serviços e da produção
+industrial nos estados brasileiros. \textbf{Revista Gestão \& Tecnologia},
+v. 17, n. 1, p. 207-231, 2017.
+
+MORTENSEN, D. T.; PISSARIDES, C. A. Job creation and job destruction in the
+theory of unemployment. \textbf{The Review of Economic Studies}, v. 61, n. 3,
+p. 397-415, 1994.
+
+PREUSS, H. The conceptualisation and measurement of mega sport event
+legacies. \textbf{Journal of Sport \& Tourism}, v. 12, n. 3-4, p. 207-228,
+2007.
+
+WAN, S. K.; SONG, H. Economic impact assessment of mega-events in the United
+Kingdom and Brazil. \textbf{Journal of Hospitality \& Tourism Research},
+v. 43, n. 7, p. 1044-1067, 2019.
+
+\end{referencias}
+
+\end{document}

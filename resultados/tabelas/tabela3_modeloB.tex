@@ -1,0 +1,33 @@
+\begin{table}
+\centering
+\begin{talltblr}[         %% tabularray outer open
+caption={Modelo B: efeito local (Belém) e transbordamento (RM), interior como controle},
+note{}={* p \num{< 0.1}, ** p \num{< 0.05}, *** p \num{< 0.01}},
+note{ }={Efeitos fixos de município x mês do ano e de mês calendário. Erros agrupados por município.},
+]                     %% tabularray outer close
+{                     %% tabularray inner open
+colspec={Q[]Q[]Q[]Q[]Q[]Q[]},
+hline{2}={1-6}{solid, black, 0.05em},
+hline{14}={1-6}{solid, black, 0.05em},
+hline{1}={1-6}{solid, black, 0.08em},
+hline{16}={1-6}{solid, black, 0.08em},
+column{2-6}={}{halign=c},
+column{1}={}{halign=l},
+}                     %% tabularray inner close
+& (1) Principal & (2) Só Alojamento (55) & (3) Só Alimentação (56) & (4) RM sem Castanhal & (5) Out-dez em bloco \\
+Belém x Preparação & \num{7.648} & \num{42.255}*** & \num{0.905} & \num{7.648} & \num{4.937} \\
+& (\num{6.089}) & (\num{8.756}) & (\num{7.673}) & (\num{6.096}) & (\num{6.284}) \\
+Belém x Evento & \num{26.746} & \num{103.988}*** & \num{18.811} & \num{26.746} & \num{18.941}** \\
+& (\num{19.517}) & (\num{36.906}) & (\num{22.401}) & (\num{19.540}) & (\num{6.938}) \\
+Belém x Desmobilização & \num{-8.102}* & \num{-37.872}*** & \num{-5.390} & \num{-8.102}* & \num{-6.565} \\
+& (\num{4.127}) & (\num{9.184}) & (\num{6.449}) & (\num{4.132}) & (\num{4.014}) \\
+RM x Preparação & \num{1.805} & \num{76.272}* & \num{-5.305} & \num{-3.490} & \num{3.076} \\
+& (\num{8.489}) & (\num{44.626}) & (\num{10.411}) & (\num{7.371}) & (\num{8.377}) \\
+RM x Evento & \num{22.672} & \num{44.059} & \num{15.674} & \num{11.255} & \num{-2.909} \\
+& (\num{29.510}) & (\num{153.346}) & (\num{30.032}) & (\num{31.211}) & (\num{15.608}) \\
+RM x Desmobilização & \num{-7.243} & \num{-55.126} & \num{-5.527} & \num{-4.034} & \num{-6.506} \\
+& (\num{8.768}) & (\num{33.322}) & (\num{11.971}) & (\num{9.848}) & (\num{9.340}) \\
+Num.Obs. & \num{1705} & \num{1705} & \num{1705} & \num{1650} & \num{1705} \\
+R2 & \num{0.251} & \num{0.279} & \num{0.243} & \num{0.251} & \num{0.251} \\
+\end{talltblr}
+\end{table}

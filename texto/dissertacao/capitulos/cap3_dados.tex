@@ -1,0 +1,285 @@
+\chapter{Dados e construção da base}\label{cap:dados}
+
+\noindent\fcolorbox{azul}{azulclaro}{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule}{
+\textbf{Em uma frase:} a base é um painel mensal das 27 capitais brasileiras (26 estaduais e Brasília),
+de janeiro de 2021 a julho de 2026, que compara o emprego formal em Alojamento e Alimentação de Belém
+com o de cidades que não sediaram a COP30.}}
+
+\section{De onde vem o desenho da base}
+
+A base segue três estudos que mediram o efeito de grandes eventos sobre o emprego com registros
+administrativos mensais. Cada escolha da base tem um precedente nessa literatura.
+
+\begin{table}[H]
+\centering\footnotesize
+\caption{Estudos que servem de molde para a construção da base}\label{tab:molde}
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{2.6cm}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X}
+\toprule
+\textbf{Escolha} & \textbf{Feddersen e Maennig (2013)} & \textbf{Hagn e Maennig (2009)} & \textbf{Leoni e Boto-García (2023)}\\
+\midrule
+Frequência & Emprego mensal; dados trimestrais escondem o efeito & Desemprego mensal & Painel mensal\\
+Fonte & Registro administrativo (Bureau of Labor Statistics) & Agência Federal de Emprego alemã & Registros de contratação na Espanha\\
+Setor & 16 setores; efeito em alojamento, alimentação e comércio & Total & Hospitalidade\\
+Controle & Condados-sede $\times$ demais condados & 12 cidades-sede $\times$ 63 não sede & Ilha afetada $\times$ outras ilhas\\
+Normalização & Emprego dividido pelo valor inicial & --- & ---\\
+Sazonalidade & Dummies de mês & Dummies sazonais & Efeitos fixos de mês\\
+Método & Diferenças em diferenças & Diferenças em diferenças & DiD em painel\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Para os registros administrativos brasileiros, o modelo de referência é Dix-Carneiro e Kovak (2017), que
+constroem mercados de trabalho regionais a partir dos microdados da RAIS para medir o efeito de um choque
+sobre o emprego local. A regra de agregação do Novo CAGED segue a metodologia oficial (Brasil, 2023).
+
+% ---------------------------------------------------------------------
+
+\section{Estrutura da base}
+
+A unidade de observação é capital $\times$ mês: 27 capitais, de jan/2021 a jul/2026, com a análise
+a partir de jan/2022.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[node distance=0.4cm]
+  \node[caixa] (f) {\textbf{1. Fontes}\\[2pt] CAGED: MOV, FOR, EXC\\ PMS/IBGE, tab.\ 5906\\[2pt]
+        \textcolor{cinza}{A coletar: RAIS, ANAC, IPCA, SICONFI}};
+  \node[caixa, right=of f] (l) {\textbf{2. Limpeza}\\[2pt] Capitais, CNAE 55+56\\ FOR soma, EXC subtrai\\
+        Pelo mês do movimento\\[2pt] \textcolor{cinza}{5 checagens}};
+  \node[destaque, right=of l] (p) {\textbf{3. Painel}\\[2pt] 27 capitais\\ $\times$ 67 meses\\
+        Saldo normalizado\\ Dummies de fase};
+  \node[caixa, right=of p] (a) {\textbf{4. Análises}\\[2pt] DiD por fase\\ Estudo de evento\\
+        Controle sintético\\ Placebos (p-valor)};
+  \draw[seta] (f) -- (l); \draw[seta] (l) -- (p); \draw[seta] (p) -- (a);
+\end{tikzpicture}
+\caption{Construção da base em quatro etapas.}
+\end{figure}
+
+Os microdados chegam como um registro por contratação ou desligamento no país inteiro; a limpeza
+filtra capitais e setores, corrige as declarações atrasadas e entrega um painel balanceado.
+
+% ---------------------------------------------------------------------
+
+\section{Mecanismo e blocos de variáveis}
+
+Cada elo do caminho entre a COP30 e o emprego tem um indicador. Hoje a base mede o último elo e o
+controle de demanda; os elos intermediários são a próxima coleta.
+
+A escolha dos elos segue a literatura aplicada. Faber e Gaubert (2019) mostram que o turismo funciona
+como um choque de demanda \textbf{local}, com ganhos concentrados nas áreas que recebem os visitantes, o
+que justifica medir o resultado no nível do município e comparar Belém com o Pará. O primeiro elo, a
+chegada de visitantes, é a variável usada por Fourie e Santana-Gallego (2011) e por Baumann e Matheson
+(2018) para medir megaeventos; esses estudos também mostram que parte dos turistas regulares deixa de
+vir durante o evento (\textit{crowding out}). No último elo, Leoni e Boto-García (2023) medem o efeito de
+um choque temporário sobre o setor hoteleiro usando justamente as \textbf{contratações mensais} em
+hospitalidade, e Krakover (2000) mostra que o emprego hoteleiro tem um componente sazonal forte, que
+precisa ser separado de qualquer choque.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[node distance=0.4cm]
+  \node[font=\footnotesize\bfseries, text=cinza, anchor=west] at (-1.75,1.55) {Canal da demanda turística};
+  \node[caixa] (v) {\textbf{Visitantes chegam}\\[2pt] Passageiros no aeroporto (ANAC)\\[3pt] \acoletar};
+  \node[caixa, right=of v] (d) {\textbf{Demanda sobe}\\[2pt] Ocupação hoteleira; IPCA hospedagem\\[3pt] \acoletar};
+  \node[caixa, right=of d] (e) {\textbf{Empresas vendem}\\[2pt] Volume de serviços (PMS/IBGE)\\[3pt] \nabase};
+  \node[destaque, right=of e] (c) {\textbf{Empresas contratam}\\[2pt] Admissões, desligamentos e saldo (CAGED)\\[3pt] \nabase};
+  \draw[seta] (v) -- (d); \draw[seta] (d) -- (e); \draw[seta] (e) -- (c);
+
+  \node[font=\footnotesize\bfseries, text=cinza, anchor=west] at (-1.75,-1.75) {Canal do setor público};
+  \node[caixa, below=1.1cm of v] (g) {\textbf{Governo investe}\\[2pt] Estado e prefeitura (SICONFI)\\[3pt] \acoletar};
+  \node[caixa, right=of g] (o) {\textbf{Obras}\\[2pt] Infraestrutura para o evento};
+  \node[caixa, right=of o] (k) {\textbf{Emprego em obras}\\[2pt] Construção civil, CNAE 41 a 43\\[3pt] \acoletar};
+  \node[caixa, right=of k] (lg) {\textbf{Legado?}\\[2pt] Uso das obras, salários e setores};
+  \draw[seta] (g) -- (o); \draw[seta] (o) -- (k); \draw[seta] (k) -- (lg);
+\end{tikzpicture}
+\caption{A COP30 chega ao emprego por dois canais. Depois do evento, o canal da demanda corre ao
+contrário: visitantes saem, a demanda cai e as contratações desaceleram.}
+\end{figure}
+
+% ---------------------------------------------------------------------
+
+\section{Fontes de dados}
+
+\begin{table}[H]
+\centering\small
+\begin{tabularx}{\linewidth}{>{\raggedright}p{3.1cm}LLp{2.3cm}l}
+\toprule
+\textbf{Fonte} & \textbf{O que traz} & \textbf{Papel} & \textbf{Recorte} & \textbf{Situação}\\
+\midrule
+Novo CAGED (microdados) & Cada admissão e desligamento formal, com CNAE, município e salário & Resultado; emprego em obras & Vínculo, mensal & Na base\\
+PMS/IBGE, tab.\ 5906 & Índice de volume de serviços (2022 = 100) & Controle de demanda & UF, mensal & Na base\\
+RAIS (PDET/MTE) & Estoque de vínculos, salários e ocupações (CBO) & Normalização; dimensões do trabalho & Vínculo, anual & A coletar\\
+ANAC & Passageiros por aeroporto & Elo: chegada de visitantes & Aeroporto, mensal & A coletar\\
+IPCA/IBGE & Preços de hospedagem e alimentação fora do domicílio & Elo: pressão sobre preços & RM, mensal & A coletar\\
+SETUR-PA e redes hoteleiras & Ocupação hoteleira & Elo: demanda por hospedagem & Belém, mensal & A pedir\\
+SICONFI/Tesouro & Investimento do estado e do município & Canal público & Ente, bimestral & A coletar\\
+PNAD Contínua; DIEESE-PA & Informalidade no setor & Descrição do que o CAGED não vê & UF, trimestral & A coletar\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+O CAGED é usado pelos microdados porque permite recortar por subclasse e município e porque soma as
+declarações fora do prazo e desconta as exclusões pelo mês do movimento (Portaria MTE nº 2.420/2023).
+A RAIS não substitui o CAGED: é anual e completa, enquanto o CAGED é mensal; a RAIS entra como
+estoque inicial e para salários e ocupações.
+
+% ---------------------------------------------------------------------
+
+\section{Dicionário de variáveis}
+
+\begin{table}[H]
+\centering\small
+\begin{tabularx}{\linewidth}{p{3.3cm}p{2.1cm}Lp{2cm}}
+\toprule
+\textbf{Variável} & \textbf{Bloco} & \textbf{Definição} & \textbf{Fonte}\\
+\midrule
+\var{cap}, \var{mun} & Identificação & Nome e código IBGE (6 dígitos) da capital & IBGE\\
+\var{competencia}, \var{mes\_ano} & Identificação & Mês de competência e mês do ano (1 a 12) & ---\\
+\var{adm}, \var{desl} & Resultado & Admissões e desligamentos em CNAE 55 + 56 & CAGED\\
+\var{saldo} & Resultado & $adm - desl$ & CAGED\\
+\var{adm\_ref} & Resultado & Média mensal de admissões, jan/2022 a jun/2024 & CAGED\\
+\var{saldo\_norm} & Resultado & $100 \times saldo / adm\_ref$: \% de um mês normal de contratações & CAGED\\
+\var{emp\_idx} & Resultado & Saldo acumulado desde jan/2022, normalizado & CAGED\\
+\var{saldo\_55}, \var{saldo\_56} & Robustez & Saldo de Alojamento e de Alimentação & CAGED\\
+\var{estoque} & Normalização & Vínculos ativos em 31/12 do ano anterior & RAIS\\
+\var{sal\_adm} & Mecanismo & Salário médio de admissão & CAGED\\
+\var{saldo\_constr} & Mecanismo & Saldo na construção civil (CNAE 41 a 43) & CAGED\\
+\var{pax} & Mecanismo & Passageiros no aeroporto da capital & ANAC\\
+\var{ocup\_hotel} & Mecanismo & Taxa de ocupação hoteleira & SETUR-PA\\
+\var{ipca\_hosp} & Mecanismo & Variação mensal dos preços de hospedagem & IPCA\\
+\var{share55} & Controle & Participação de Alojamento nas admissões & CAGED\\
+\var{ln\_ivs} & Controle & Log do índice de volume de serviços da UF & PMS/IBGE\\
+\var{tratado} & Tratamento & 1 para Belém, 0 para as demais & ---\\
+\var{D\_prep}, \var{D\_evento}, \var{D\_desmob} & Tratamento & Fases da COP30 (seção~\ref{sec:fases}) & ---\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+A normalização de \var{saldo\_norm} torna as capitais comparáveis: $+300$ vagas é muito em Palmas e
+pouco em São Paulo, mas ``$+20\%$ de um mês normal'' significa o mesmo nas duas.
+
+% ---------------------------------------------------------------------
+
+\section{Tratamento, fases e grupo de controle}\label{sec:fases}
+
+Belém é a única unidade tratada; as outras 25 capitais (todas menos o Rio de Janeiro) formam o grupo
+de controle.
+
+\begin{table}[H]
+\centering\small
+\begin{tabularx}{\linewidth}{p{3cm}p{3.6cm}L}
+\toprule
+\textbf{Fase} & \textbf{Período} & \textbf{Uso}\\
+\midrule
+Referência & jan/2022 a jun/2024 & Linha de base; normaliza o saldo e ajusta o controle sintético\\
+Preparação & jul/2024 a out/2025 & Antecipação: contratações pela demanda esperada\\
+Evento & nov/2025 & Mês da conferência\\
+Desmobilização & dez/2025 a jul/2026 & Fase de interesse da pergunta\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{itemize}
+  \item \textbf{2021 fica fora da análise:} a recuperação da pandemia foi desigual entre capitais.
+  \item \textbf{Rio de Janeiro sai do controle:} sediou a cúpula do G20 em novembro de 2024.
+  \item \textbf{A janela de preparação é fixada pelo calendário, e não pelo gráfico:} a especificação
+        principal usa a janela longa (jul/2024 a out/2025); a curta (set--out/2025) entra só como robustez.
+\end{itemize}
+
+\textbf{Dois eventos que se sobrepõem à COP em Belém.}
+\begin{itemize}
+  \item \textbf{Círio de Nazaré (outubro).} Acontece todo ano e é absorvido pelo efeito fixo de capital
+        $\times$ mês do ano. Em 2025, porém, ficou colado na COP: temporários contratados para o Círio podem
+        ter sido mantidos até a conferência e desligados só em dezembro, deslocando desligamentos de
+        novembro para dezembro. Por isso, outubro a dezembro também é analisado como um bloco único.
+  \item \textbf{Conferência Internacional Amazônia e Novas Economias (6 a 8 de novembro de
+        2024).}\footnote{Ver \url{https://mundodomarketing.com.br/institucional/amazonia-e-foco-de-conferencia-internacional-em-novembro}.}
+        Coincide com o saldo atípico de novembro de 2024 ($+837$ vagas no Pará). Cai na fase de preparação;
+        um teste de robustez exclui esse mês de Belém, e a decomposição por município e subclasse verifica
+        se o pico se concentra em serviços de eventos (CNAE 5620).
+\end{itemize}
+
+\begin{table}[H]
+\centering\small
+\caption{Saldo em Alojamento e Alimentação no Pará, outubro a dezembro}\label{tab:outdez}
+\begin{tabular}{lrrrr}
+\toprule
+& \textbf{Out} & \textbf{Nov} & \textbf{Dez} & \textbf{Soma}\\
+\midrule
+2023 & $+218$ & $+133$ & $-225$ & $+126$\\
+2024 & $+109$ & $+837$ & $-399$ & $+547$\\
+2025 & $+667$ & $+560$ & $-270$ & $+957$\\
+\bottomrule
+\end{tabular}\\[3pt]
+{\footnotesize Fonte: Novo CAGED, microdados MOV, FOR e EXC (\url{https://pdet.mte.gov.br}, Microdados, Novo CAGED):
+filtrar UF 15 e subclasses CNAE 55 e 56, somar MOV e FOR e subtrair EXC pelo mês de competência.}
+\end{table}
+
+Somado em bloco, o saldo de 2025 continua acima dos anos anteriores: o aquecimento não é apenas um
+deslocamento de calendário.
+
+% ---------------------------------------------------------------------
+
+\section{Checagens de qualidade e limitações}\label{sec:checagens}
+
+\begin{itemize}[label=$\square$]
+  \item Nenhuma capital com admissões zeradas (erro de código IBGE).
+  \item Painel balanceado: 27 capitais $\times$ todos os meses com arquivo MOV.
+  \item Meses sem arquivo MOV ficam ausentes, nunca zero.
+  \item Alojamento + Alimentação = total em todas as linhas.
+  \item Saldo de Belém igual ao da base anterior nos mesmos meses.
+\end{itemize}
+
+\begin{table}[H]
+\centering\small
+\begin{tabularx}{\linewidth}{p{3.2cm}LL}
+\toprule
+\textbf{Limitação} & \textbf{Consequência} & \textbf{Tratamento}\\
+\midrule
+Só emprego formal & Informalidade fica fora & Descrita com PNAD Contínua e DIEESE-PA\\
+8 meses pós-evento & Baixo poder estatístico & Não significância $\neq$ ausência de efeito\\
+Uma unidade tratada & Erro-padrão convencional inválido & Inferência por placebos\\
+Revisões do CAGED & Meses recentes ainda mudam & Reprocessar a cada divulgação\\
+Círio colado na COP & Desligamentos deslocados para dezembro & Análise de out--dez em bloco\\
+Outros eventos em Belém & Choques próprios da cidade & Exclusão de nov/2024; decomposição por subclasse\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+% ---------------------------------------------------------------------
+
+\section{Contexto e evidências complementares}
+
+\textbf{Métodos ex ante do turismo.} Insumo-produto (IO), equilíbrio geral computável (CGE), matriz de
+contabilidade social (SAM), conta satélite do turismo (TSA), pesquisas de gasto e multiplicadores de
+valor adicionado (GVA). Partem do gasto turístico e projetam efeitos; esta pesquisa é ex post e os usa
+como contraponto. Dwyer, Forsyth e Spurr (2005) mostram que modelos de insumo-produto superestimam o
+impacto de eventos porque ignoram restrições de oferta e o deslocamento de outros gastos, e Lee e Taylor
+(2005) documentam essa superestimação no caso da Copa de 2002.
+
+\textbf{Dimensões do trabalho.} Emprego, salário e renda, produtividade, estrutura ocupacional,
+desigualdade de ganhos, características da força de trabalho e condições de trabalho.
+
+\textbf{Eventos de comparação.}
+\begin{table}[H]
+\centering\small
+\begin{tabularx}{\linewidth}{p{3.2cm}LL}
+\toprule
+\textbf{Evento} & \textbf{O que ensina} & \textbf{Uso na pesquisa}\\
+\midrule
+Círio de Nazaré & Grande evento recorrente; a COP não se repete & Sazonalidade de outubro, absorvida pelos efeitos fixos\\
+Carnaval e Parintins & Aumento de renda concentrado em poucos dias & Comparação: evento recorrente $\times$ evento único\\
+Rio 2016 e reformas & Investimento concentrado e deslocamento de moradores & Literatura de legado; Rio fora do controle\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\textbf{Infraestrutura e legado.} Além das receitas, há obras, construtoras e novos negócios. Ficam em
+aberto o uso das construções, os impactos ambientais e culturais, o efeito simbólico sobre o imaginário
+da cidade e a justificativa do investimento público.
+
+\textbf{Contatos:} DIEESE-PA, SETUR-PA, redes hoteleiras e Paula (IPEA), da palestra do PET sobre
+megaeventos.
+
+% ---------------------------------------------------------------------
+

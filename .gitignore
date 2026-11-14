@@ -1,0 +1,29 @@
+# microdados do CAGED (muito grandes, baixar de novo pelo 01_base_para.R)
+dados/brutos/*
+!dados/brutos/.gitkeep
+
+# agregados mensais em .rds (sao refeitos a partir dos brutos)
+dados/intermediarios/*
+!dados/intermediarios/.gitkeep
+
+# R
+.Rproj.user/
+.Rhistory
+.RData
+.Ruserdata
+
+# LaTeX
+*.aux
+*.log
+*.out
+*.toc
+*.synctex.gz
+*.fdb_latexmk
+*.fls
+*.bbl
+*.blg
+
+# sistema
+.DS_Store
+Thumbs.db
+desktop.ini

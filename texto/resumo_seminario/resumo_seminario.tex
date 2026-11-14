@@ -1,0 +1,107 @@
+% =====================================================================
+%  Resumo do projeto de dissertação - Seminário de Dissertação I
+%  Limite: 800 palavras. Compilar no Overleaf com pdfLaTeX.
+% =====================================================================
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[brazil]{babel}
+\usepackage{mathptmx}
+\usepackage[top=2.5cm, left=3cm, bottom=2cm, right=2cm]{geometry}
+\usepackage{setspace}
+\setstretch{1.15}
+\usepackage{indentfirst}
+\setlength{\parindent}{1.25cm}
+\usepackage{microtype}
+\usepackage{titlesec}
+\titleformat{\section}{\normalfont\bfseries}{}{0em}{}
+\titlespacing*{\section}{0pt}{8pt}{3pt}
+\pagestyle{empty}
+
+\begin{document}
+
+\begin{center}
+  {\bfseries O EFEITO DA COP30 SOBRE O EMPREGO FORMAL EM ALOJAMENTO E ALIMENTAÇÃO EM BELÉM}\\[4pt]
+  Marcela Paz da Silva Enriquez\\
+  Resumo do projeto de dissertação -- Seminário de Dissertação I -- PPGE/UFF
+\end{center}
+
+\section{Contexto e pergunta}
+
+Grandes eventos costumam ser defendidos pela promessa de gerar empregos. Foi assim com a COP30,
+realizada em Belém em novembro de 2025, a primeira COP sediada na Amazônia.
+A literatura internacional sobre megaeventos, porém, encontra efeitos sobre o emprego pequenos,
+concentrados em poucos setores e passageiros. A
+pesquisa pergunta: \textbf{a COP30 mudou o emprego formal em Alojamento e Alimentação em Belém, e esse
+efeito permaneceu depois que o evento terminou?} Como hotéis, restaurantes e bares são os primeiros a
+receber o gasto dos visitantes, a análise do emprego se concentra nesses setores.
+
+\section{Objetivos}
+
+O objetivo geral é estimar o efeito causal da COP30 sobre o saldo de empregos formais do setor em
+Belém. Os objetivos específicos são: (i) separar os efeitos na preparação, no mês do evento e na
+desmobilização; (ii) verificar se o efeito se concentra no alojamento ou na alimentação; e (iii)
+verificar se o emprego se espalhou para a Região Metropolitana.
+
+\section{Hipóteses}
+
+H1: houve contratação antecipada na fase de preparação, depois do anúncio do evento. H2: o saldo
+aumentou no mês do evento, puxado pelo alojamento. H3: na desmobilização, o saldo ficou abaixo do
+que seria esperado sem o evento. H4: o efeito foi temporário.
+
+\section{Dados}
+
+A base usa os microdados do Novo CAGED, que registram cada contratação e demissão com carteira
+assinada. Para cada capital e cada mês, de janeiro de 2022 a julho de 2026, calcula-se o saldo (contratações
+menos demissões) nas divisões 55 e 56 da CNAE. O saldo é dividido pela média mensal de contratações da própria cidade antes do evento. O resultado é
+um painel balanceado de 26 capitais observadas por 55 meses. O Rio de Janeiro é excluído porque sediou
+a Cúpula do G20 em novembro de 2024, um evento do mesmo tipo.
+
+\section{Metodologia}
+
+O problema central é que não se observa o emprego que Belém teria tido sem a COP30, o contrafactual.
+Comparar Belém antes e depois não basta, porque o emprego também muda com a estação e a conjuntura. A estratégia é a de \textbf{diferenças em diferenças}: compara-se a
+variação do emprego em Belém com a variação nas demais capitais no mesmo período. A variação das outras
+capitais representa o que teria acontecido com Belém sem o evento, e a diferença entre as duas
+variações é o efeito da COP30. O modelo é estimado por mínimos quadrados ordinários com efeitos fixos
+de capital e de mês. O desenho segue Leoni e Boto-García (2023), que avaliam um
+choque temporário sobre a hotelaria com uma única unidade tratada.
+
+A hipótese de identificação é a de tendências paralelas: sem a COP30, Belém teria seguido a mesma
+tendência das outras capitais. Como há uma única
+cidade tratada, a significância é avaliada por placebo, tratando cada capital como se tivesse sediado
+a COP30. Os resultados são
+conferidos pelo controle sintético (Abadie, Diamond e Hainmueller, 2010) e por testes que isolam o
+Círio de Nazaré e a conferência realizada em Belém em novembro de 2024.
+Uma análise complementar aplica o mesmo desenho aos municípios do Pará, comparando Belém e sua Região
+Metropolitana com o interior, para medir se o emprego transbordou para os vizinhos.
+
+\section{Resultados esperados e contribuição}
+
+Espera-se um efeito positivo e concentrado no alojamento durante o evento, seguido de desaceleração
+na desmobilização. Essa expectativa se apoia em estudos que avaliaram os efeitos econômicos de
+outros megaeventos: a Copa do Mundo de 2006 na Alemanha (Hagn e Maennig, 2009), a Copa do Mundo de
+2014 no Brasil (Baumann e Matheson, 2018), os Jogos Olímpicos de Atlanta em 1996 (Feddersen e
+Maennig, 2013) e o Jubileu de 2000 em Roma (Bronzini, Mocetti e Mongardini, 2019). Em geral, esses
+estudos encontram efeitos modestos, concentrados no turismo e no período do evento. Dados preliminares
+do Pará mostram saldo positivo depois da COP30, mas menor que nos anos anteriores. A pesquisa contribui com a primeira avaliação \textit{ex post} de uma conferência do clima sobre o
+mercado de trabalho, com dados administrativos brasileiros. Uma limitação é que o CAGED capta apenas o emprego formal,
+relevante em uma região de alta informalidade.
+
+\section{Referências}
+\small
+ABADIE, A.; DIAMOND, A.; HAINMUELLER, J. Synthetic control methods for comparative case studies.
+\textit{Journal of the American Statistical Association}, v. 105, n. 490, p. 493--505, 2010.\par
+BAUMANN, R.; MATHESON, V. Mega-events and tourism: the case of Brazil. \textit{Contemporary Economic
+Policy}, v. 36, n. 2, p. 292--301, 2018.\par
+BRONZINI, R.; MOCETTI, S.; MONGARDINI, M. \textit{The economic effects of big events}: evidence from the
+Great Jubilee 2000 in Rome. Roma: Banca d'Italia, 2019. (Temi di discussione, n. 1208).\par
+FEDDERSEN, A.; MAENNIG, W. Mega-events and sectoral employment: the case of the 1996 Olympic Games.
+\textit{Contemporary Economic Policy}, v. 31, n. 3, p. 580--603, 2013.\par
+HAGN, F.; MAENNIG, W. Large sport events and unemployment: the case of the 2006 soccer World Cup in
+Germany. \textit{Applied Economics}, v. 41, n. 25, p. 3295--3302, 2009.\par
+LEONI, V.; BOTO-GARCÍA, D. The effect of natural disasters on hotel demand, supply and labour markets:
+evidence from the La Palma volcano eruption. \textit{Environmental and Resource Economics}, v. 86,
+n. 4, p. 755--780, 2023.\par
+
+\end{document}

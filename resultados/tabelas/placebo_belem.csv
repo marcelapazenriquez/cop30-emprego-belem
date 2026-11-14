@@ -1,0 +1,10 @@
+variavel,fase,efeito,p_simples,p_ponderado,municipios
+saldo_norm,Preparação,7.65,0.654,0.115,26
+saldo_norm,Evento,26.75,0.5,0.115,26
+saldo_norm,Desmobilização,-8.1,0.808,0.154,26
+saldo_norm_55,Preparação,42.26,0.192,0.038,26
+saldo_norm_55,Evento,103.99,0.346,0.038,26
+saldo_norm_55,Desmobilização,-37.87,0.231,0.038,26
+saldo_norm_56,Preparação,0.9,0.962,0.885,26
+saldo_norm_56,Evento,18.81,0.808,0.154,26
+saldo_norm_56,Desmobilização,-5.39,0.808,0.308,26

@@ -1,0 +1,198 @@
+% =====================================================================
+%  Atividade 4 - Métodos (seminário de dissertação) - versão didática
+%  Notação alinhada às Aulas 6, 7 e 8 de Microeconometria II (Profa. Dani, PPGE-UFF)
+%  Compilar no Overleaf com pdfLaTeX (padrão). Limite: 3 páginas de texto.
+% =====================================================================
+\documentclass[12pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[brazil]{babel}
+\addto\captionsbrazil{\renewcommand{\tablename}{Quadro}}
+
+\usepackage{mathptmx}
+\usepackage{amsmath}
+\usepackage[top=3cm, left=3cm, bottom=2cm, right=2cm]{geometry}
+\usepackage{setspace}
+\setstretch{1.12}
+\usepackage{indentfirst}
+\setlength{\parindent}{1.25cm}
+\usepackage{microtype}
+
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{float}
+\usepackage{titlesec}
+\titleformat{\section}{\normalfont\bfseries}{\thesection}{0.5em}{}
+\titlespacing*{\section}{0pt}{8pt}{3pt}
+\usepackage[hidelinks]{hyperref}
+\newcolumntype{L}{>{\raggedright\arraybackslash}X}
+
+\newenvironment{referencias}{%
+  \section*{Referências}
+  \begin{singlespace}\footnotesize
+  \setlength{\parindent}{0pt}
+  \setlength{\parskip}{2pt}
+  \raggedright
+}{%
+  \end{singlespace}
+}
+
+\begin{document}
+
+\begin{center}
+  {\bfseries ATIVIDADE 4 -- MÉTODOS\\
+  O EFEITO DA COP30 SOBRE O EMPREGO FORMAL EM ALOJAMENTO E ALIMENTAÇÃO}\\[4pt]
+  Marcela Paz da Silva Enriquez
+\end{center}
+
+\section{A pergunta e o problema de identificação}
+
+A pesquisa quer saber se a COP30, realizada em Belém em novembro de 2025, mudou o emprego formal
+em Alojamento e Alimentação (hotéis, restaurantes e bares; divisões 55 e 56 da CNAE) e se esse efeito
+permaneceu depois que o evento acabou. Para responder, seria preciso comparar dois mundos: a Belém que
+sediou a COP30 e a mesma Belém, no mesmo mês, sem a COP30. Em notação, $y_{it}(1)$ é o emprego da
+capital $i$ no mês $t$ com o evento e $y_{it}(0)$ é o emprego sem o evento; a variável $d_i$ indica
+quem recebeu o tratamento ($d_i = 1$ para Belém e $d_i = 0$ para as demais capitais). O efeito da COP30
+em Belém é a diferença entre os dois mundos, $y_{it}(1) - y_{it}(0)$, e a sua média,
+$ATT(t) = E[y_{it}(1) - y_{it}(0) \mid d_i = 1]$, é o efeito médio do tratamento sobre os tratados: o
+efeito do evento na cidade que de fato o recebeu. O problema é que só um dos mundos aconteceu. O
+emprego com a COP30 é observado nos dados, mas o emprego que Belém teria sem ela, $y_{it}(0)$, nunca
+pode ser visto. Esse é o problema fundamental da inferência causal, e o método serve para estimar esse
+cenário que falta, chamado de contrafactual.
+
+Comparar Belém com as outras capitais em um único mês daria o ATT mais um viés de seleção, porque
+Belém não foi escolhida ao acaso. Métodos que controlam apenas características observáveis, como o
+pareamento, não resolvem o problema, pois a escolha da sede depende de fatores não observados.
+Também não há um limiar que defina o tratamento, como
+exige a regressão descontínua. Como há dados de muitos meses, a estratégia adequada é a de \textbf{diferenças em diferenças com dados em painel}, que elimina as características
+não observadas fixas no tempo.
+
+\section{Dados}
+
+Os dados vêm dos microdados do Novo CAGED, do Ministério do Trabalho e Emprego, que registram cada
+contratação e demissão com carteira assinada, com município e atividade da empresa. Para cada capital
+e mês calcula-se o saldo (contratações menos demissões) em Alojamento e Alimentação, dividido pela média
+mensal de contratações da própria capital antes do evento; assim, $y_{it} = 10$ significa ``10\% de um
+mês normal de contratações''. A amostra reúne as capitais brasileiras: Belém
+e 25 capitais de controle ($n = 26$). O Rio de Janeiro fica fora porque sediou a Cúpula do G20 em
+novembro de 2024, um evento do mesmo tipo; como também recebeu um choque de demanda, não representa
+o cenário ``sem evento'' que o grupo de controle precisa representar. As mesmas 26 capitais são
+observadas em todos os 55 meses (jan/2022 a jul/2026), sem falhas: um \textbf{painel balanceado}.
+
+\section{Método: diferenças em diferenças}
+
+\textbf{O modelo canônico.} Seja $T_t = 1$ nos meses depois do início do tratamento e $T_t = 0$ antes.
+A regressão de diferenças em diferenças é
+\begin{equation}
+y_{it} = \alpha + \theta d_i + \lambda T_t + \gamma\,(d_i \times T_t) + \epsilon_{it},
+\end{equation}
+e o Quadro 1 mostra o significado de cada coeficiente.
+
+\begin{table}[H]
+\centering\small
+\caption{Interpretação dos coeficientes}
+\begin{tabularx}{\linewidth}{lccL}
+\toprule
+ & \textbf{Antes ($T_t = 0$)} & \textbf{Depois ($T_t = 1$)} & \textbf{Depois menos antes}\\
+\midrule
+Belém ($d_i = 1$) & $\alpha + \theta$ & $\alpha + \theta + \lambda + \gamma$ & $\lambda + \gamma$\\
+Outras capitais ($d_i = 0$) & $\alpha$ & $\alpha + \lambda$ & $\lambda$\\
+\midrule
+\textbf{Diferença em diferenças} & & & $\gamma^{DID} = \Delta Tr - \Delta Cr = \boldsymbol{\gamma}$\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+O coeficiente $\theta$ é a diferença permanente entre Belém e as outras capitais, e some na diferença
+``depois menos antes''; $\lambda$ é o choque agregado que atinge todas as capitais, e some na
+diferença ``Belém menos as outras''. Sobra $\gamma$, o efeito da COP30.
+
+\textbf{Vários meses: efeitos fixos e $ATT(t)$.} Como o painel tem muitos meses antes e depois, o modelo
+é estimado em efeitos fixos em dois sentidos (TWFE), com uma interação para cada mês pós-tratamento:
+\begin{equation}
+y_{it} = \alpha_i + \lambda_t + \sum_{\tau} \gamma_\tau \, \mathbf{1}_\tau(d_i) + \epsilon_{it}.
+\end{equation}
+O efeito fixo $\alpha_i$ generaliza $\theta$: capta as características não observadas e constantes no
+tempo de cada capital, inclusive as que levaram Belém a ser escolhida. Ele é definido por capital e mês
+do ano, para que cada cidade tenha a sua própria sazonalidade (em Belém, o Círio de Nazaré em outubro).
+O efeito fixo $\lambda_t$ generaliza $\lambda$: capta choques agregados como juros, inflação e o ciclo
+nacional. Cada $\gamma_\tau$ estima $ATT(\tau)$, o efeito em um mês específico, e a trajetória mostra se
+o efeito cresce, se mantém ou se dissipa. Os efeitos são resumidos em três fases, preparação
+(jul/2024--out/2025), evento (nov/2025) e desmobilização (dez/2025--jul/2026), pela média dos
+$ATT(t)$ de cada fase, $\Gamma = \sum_t w(t)\,ATT(t)$, com pesos iguais dentro da fase. Como só Belém é tratada, e numa única
+data, o grupo de controle é formado apenas por cidades que nunca sediaram a COP; por isso não ocorre o
+viés do TWFE apontado por Goodman-Bacon (2021) para tratamentos que começam em datas diferentes.
+
+\textbf{Hipóteses.} (1) \textit{Tendências paralelas}: sem a COP30, a evolução de $y_{it}(0)$ em
+Belém seria igual à das outras capitais, em todos os meses; os níveis podem ser diferentes. Com vários
+meses pré-tratamento, isso é verificado estimando $\gamma_\tau$ também antes de jul/2024, que devem ser
+próximos de zero. (2) \textit{Não antecipação}: como o evento foi anunciado com mais de um ano de
+antecedência, o tratamento começa no início da preparação (jul/2024), e não em novembro de 2025.
+(3) \textit{SUTVA}: o emprego das capitais de controle não pode ter sido afetado pela COP30; por isso o
+Rio é excluído e as capitais do Norte são testadas fora da amostra. (4) \textit{Irreversibilidade}:
+Belém permanece como ``cidade que sediou a COP'' depois do evento, e os $ATT(t)$ da desmobilização medem
+quanto do efeito sobrevive.
+
+\textbf{Em que artigos o modelo se baseia.} O modelo segue diretamente Leoni e Boto-García (2023), que
+avaliam a erupção vulcânica de La Palma, um choque temporário sobre uma economia dependente do turismo,
+com um painel mensal de zonas turísticas das Ilhas Canárias. Como aqui, há uma única unidade tratada
+(La Palma), efeitos fixos de unidade e de mês, e o tratamento é dividido em dois períodos, durante e
+depois do evento, o que permite ver se o efeito persiste. Os autores encontram queda de cerca de
+30\% no emprego da hotelaria durante e depois da erupção. A lógica geral é a de Card e Krueger (1994); no Brasil, o
+trabalho mais próximo é Mancha (2026), apresentado no 48º Encontro Brasileiro de Econometria.
+
+\textbf{Análise complementar: transbordamento no Pará.} Leoni e Boto-García (2023) acrescentam um grupo
+``potencialmente tratado'' (as ilhas vizinhas) para medir se o efeito se espalhou. A mesma ideia é
+aplicada aos municípios do Pará: Belém é a tratada, os demais municípios da Região Metropolitana são os
+potencialmente tratados e o interior é o controle. Um coeficiente positivo para a Região Metropolitana
+indica que o emprego transbordou para os vizinhos; um negativo, que Belém atraiu trabalhadores deles.
+
+\section{Cuidados na estimação}
+
+\begin{table}[H]
+\centering\small
+\caption{Cuidados do modelo de diferenças em diferenças e como são tratados}
+\begin{tabularx}{\linewidth}{p{4.2cm}L}
+\toprule
+\textbf{Cuidado} & \textbf{Como é tratado nesta pesquisa}\\
+\midrule
+Tendência comum & Placebo de \textit{timing} (``evento'' falso em nov/2023, sem efeito esperado) e placebo de grupo (cada capital tratada como se tivesse sediado a COP30)\\
+Transformações não lineares & O saldo pode ser negativo, por isso é usado em nível normalizado, e não em logaritmo\\
+Composição dos grupos & Painel balanceado, com as mesmas 26 capitais em todos os meses\\
+Inferência e correlação serial (Bertrand, Duflo e Mullainathan, 2004) & Com uma única unidade tratada, o p-valor vem do placebo de grupo: a posição de Belém no ranking dos 26 efeitos (Conley e Taber, 2011)\\
+Outros choques em Belém & Outubro a dezembro estimados como um bloco (Círio); retirada de nov/2024 (Conferência Amazônia e Novas Economias)\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Como há uma só cidade tratada, o resultado será conferido por um segundo método, o controle sintético
+(Abadie, Diamond e Hainmueller, 2010). Em vez da média das outras capitais, ele usa como comparação uma
+``Belém sintética'': uma média ponderada de capitais escolhida para ter o emprego mais parecido possível
+com o de Belém antes da COP30. Se os dois métodos apontarem na mesma direção, a conclusão é mais robusta.
+
+\begin{referencias}
+ABADIE, A.; DIAMOND, A.; HAINMUELLER, J. Synthetic control methods for comparative case studies.
+\textit{Journal of the American Statistical Association}, v. 105, n. 490, p. 493--505, 2010.
+
+BERTRAND, M.; DUFLO, E.; MULLAINATHAN, S. How much should we trust differences-in-differences
+estimates? \textit{Quarterly Journal of Economics}, v. 119, n. 1, p. 249--275, 2004.
+
+CARD, D.; KRUEGER, A. B. Minimum wages and employment: a case study of the fast-food industry in New
+Jersey and Pennsylvania. \textit{American Economic Review}, v. 84, n. 4, p. 772--793, 1994.
+
+CONLEY, T. G.; TABER, C. R. Inference with ``difference in differences'' with a small number of
+policy changes. \textit{Review of Economics and Statistics}, v. 93, n. 1, p. 113--125, 2011.
+
+GOODMAN-BACON, A. Difference-in-differences with variation in treatment timing. \textit{Journal of
+Econometrics}, v. 225, n. 2, p. 254--277, 2021.
+
+LEONI, V.; BOTO-GARCÍA, D. The effect of natural disasters on hotel demand, supply and labour
+markets: evidence from the La Palma volcano eruption. \textit{Environmental and Resource Economics},
+v. 86, n. 4, p. 755--780, 2023.
+
+MANCHA, A. The State strikes back: evidence from police crackdowns in São Paulo, Brazil. In: ENCONTRO
+BRASILEIRO DE ECONOMETRIA, 48., 2026. \textit{Anais}. [S. l.]: SBE, 2026.
+\end{referencias}
+
+\end{document}

@@ -1,0 +1,46 @@
+% ---- Preâmbulo comum: dissertação e entregas das disciplinas ----------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[brazil]{babel}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage[top=3cm, left=3cm, bottom=2cm, right=2cm]{geometry}
+\usepackage{setspace}\onehalfspacing
+\usepackage{indentfirst}\setlength{\parindent}{1.25cm}
+\usepackage{amsmath, amssymb}
+\usepackage{booktabs, tabularx, array, float, multirow}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{positioning, arrows.meta}
+\usepackage{listings}
+\usepackage[hidelinks]{hyperref}
+
+\definecolor{azul}{HTML}{1F5FAD}
+\definecolor{azulclaro}{HTML}{E6EEF8}
+\definecolor{cinza}{HTML}{6B6B6B}
+\definecolor{borda}{HTML}{B9B6AC}
+\definecolor{verde}{HTML}{2E8B3D}
+\definecolor{amarelo}{HTML}{E0A000}
+\definecolor{fundo}{HTML}{F5F5F2}
+
+\setlist{itemsep=2pt, topsep=4pt}
+\newcolumntype{L}{>{\raggedright\arraybackslash}X}
+\newcommand{\var}[1]{\texttt{#1}}
+\newcommand{\pronto}[1]{\par\smallskip\noindent\textcolor{verde}{\textbf{Pronto quando:}} #1}
+\renewcommand{\arraystretch}{1.25}
+
+\tikzset{
+  caixa/.style={draw=borda, rounded corners=4pt, line width=0.8pt, align=left,
+                text width=3.1cm, minimum height=2.3cm, inner sep=5pt, font=\footnotesize,
+                execute at begin node={\hyphenpenalty=10000\exhyphenpenalty=10000}},
+  destaque/.style={caixa, draw=azul, fill=azulclaro, line width=1.4pt},
+  seta/.style={-{Latex[length=2.2mm]}, draw=cinza, line width=0.8pt}
+}
+\newcommand{\nabase}{\textcolor{verde}{\large$\bullet$}\,na base}
+\newcommand{\acoletar}{\textcolor{amarelo}{\large$\bullet$}\,a coletar}
+
+\lstset{language=R, basicstyle=\ttfamily\footnotesize, backgroundcolor=\color{fundo},
+        frame=single, rulecolor=\color{fundo}, breaklines=true, columns=fullflexible,
+        keepspaces=true, showstringspaces=false, inputencoding=utf8, extendedchars=true,
+        literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1 {ã}{{\~a}}1 {õ}{{\~o}}1 {ç}{{\c c}}1 {ê}{{\^e}}1}

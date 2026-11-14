@@ -1,0 +1,240 @@
+% =====================================================================
+%  Microeconometria (Profa. Dani)
+%  Estratégia de identificação: COP30 e emprego em Alojamento e Alimentação
+%  Compilar no Overleaf com pdfLaTeX
+% =====================================================================
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[brazil]{babel}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage[top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm]{geometry}
+\usepackage{setspace}\setstretch{1.15}
+\usepackage{amsmath, amssymb}
+\usepackage{booktabs, tabularx, array, float, multirow}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{titlesec}
+\usepackage[hidelinks]{hyperref}
+
+\definecolor{azul}{HTML}{1F5FAD}
+\definecolor{azulclaro}{HTML}{E6EEF8}
+\definecolor{fundo}{HTML}{F5F5F2}
+\titleformat{\section}{\large\bfseries\color{azul}}{\thesection}{0.6em}{}
+\titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{0.6em}{}
+\setlist{itemsep=2pt, topsep=4pt}
+\newcolumntype{L}{>{\raggedright\arraybackslash}X}
+\newcommand{\var}[1]{\texttt{#1}}
+\renewcommand{\arraystretch}{1.25}
+\lstset{language=R, basicstyle=\ttfamily\footnotesize, backgroundcolor=\color{fundo},
+        frame=single, rulecolor=\color{fundo}, breaklines=true, columns=fullflexible,
+        keepspaces=true, showstringspaces=false, inputencoding=utf8, extendedchars=true,
+        literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1 {ã}{{\~a}}1 {õ}{{\~o}}1 {ç}{{\c c}}1 {ê}{{\^e}}1}
+
+\begin{document}
+
+\begin{center}
+  {\Large\bfseries\color{azul} Efeito da COP30 sobre o emprego formal em hospitalidade:}\\[3pt]
+  {\Large\bfseries\color{azul} diferenças em diferenças e controle sintético com uma unidade tratada}\\[8pt]
+  Marcela Paz da Silva Enriquez\\
+  Microeconometria -- Profa.\ Dani \quad·\quad Outubro de 2026
+\end{center}
+
+\vspace{4pt}
+\noindent\fcolorbox{azul}{azulclaro}{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule}{
+\textbf{Parâmetro de interesse:} efeito médio da COP30 sobre o saldo mensal de empregos formais em
+Alojamento e Alimentação em Belém, nos meses após o evento (ATT).
+\textbf{Desenho:} painel de 27 capitais $\times$ 67 meses; Belém tratada, 25 capitais de controle.
+\textbf{Estimadores:} diferenças em diferenças com efeitos fixos, estudo de evento e controle sintético.
+\textbf{Inferência:} testes de permutação (placebos).}}
+
+% ---------------------------------------------------------------------
+\section{Problema de identificação}
+
+O resultado potencial de Belém sem a COP30 não é observado. Para o mês $t$ após o evento, o efeito é
+\begin{equation}
+\tau_t = Y_{\text{Bel},t}(1) - Y_{\text{Bel},t}(0),
+\end{equation}
+e o parâmetro de interesse é a média de $\tau_t$ na fase de desmobilização (dez/2025 a jul/2026).
+A comparação de Belém com o próprio passado confunde o efeito com o ciclo econômico; a comparação
+com o resto do país, em nível, confunde com diferenças estruturais entre cidades. O desenho usa outras
+capitais como contrafactual, condicionando na sazonalidade de cada cidade e nos choques comuns.
+
+Literatura que motiva o desenho: Hagn e Maennig (2009) comparam as sedes da Copa de 2006 com outras
+cidades alemãs por diferenças em diferenças; Bronzini, Mocetti e Mongardini (2019) usam controle
+sintético para o Jubileu de 2000 em Roma; Kobierecki e Pierzgalski (2022) aplicam controle sintético
+a Copas e Olimpíadas.
+
+% ---------------------------------------------------------------------
+\section{Dados e variável de resultado}
+
+O painel vem dos microdados do Novo CAGED (admissões e desligamentos por subclasse CNAE e município),
+somando declarações fora do prazo e subtraindo exclusões pelo mês de competência.
+
+\begin{table}[H]
+\centering\small
+\begin{tabularx}{\linewidth}{p{2.6cm}L}
+\toprule
+\textbf{Elemento} & \textbf{Definição}\\
+\midrule
+Unidades & 27 capitais (26 estaduais e Brasília); Belém tratada; Rio de Janeiro excluído do controle por sediar o G20 em nov/2024\\
+Período & jan/2021 a jul/2026; análise a partir de jan/2022 (fora da recuperação da pandemia)\\
+\var{saldo\_norm} & $100 \times (adm - desl)/\overline{adm}^{\,ref}_c$, com $\overline{adm}^{\,ref}_c$ a média mensal de admissões da capital $c$ de jan/2022 a jun/2024\\
+\var{emp\_idx} & Saldo acumulado desde jan/2022, normalizado da mesma forma (resultado do controle sintético)\\
+Fases & Referência jan/22--jun/24; preparação jul/24--out/25; evento nov/25; desmobilização dez/25--jul/26\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+A normalização torna o resultado comparável entre capitais de tamanhos muito diferentes: o saldo é
+medido como fração de um mês ``normal'' de contratações da própria cidade.
+
+% ---------------------------------------------------------------------
+\section{Estimador 1: diferenças em diferenças por fase}
+
+\begin{equation}
+y_{ct} = \alpha_{c,\,m(t)} + \lambda_t + \beta_P\,(B_c \times Prep_t) + \beta_E\,(B_c \times Evento_t)
+       + \beta_D\,(B_c \times Desmob_t) + \varepsilon_{ct}
+\end{equation}
+
+\begin{itemize}
+  \item $\alpha_{c,m(t)}$: efeito fixo de capital $\times$ mês do ano. Absorve o nível de cada capital e
+        a sua sazonalidade própria (Círio em Belém, Carnaval em Salvador).
+  \item $\lambda_t$: efeito fixo de mês calendário. Absorve choques comuns (juros, inflação, ciclo nacional).
+  \item $B_c = 1$ para Belém. $\beta_D$ estima o ATT médio na desmobilização.
+\end{itemize}
+
+\textbf{Estudo de evento.} As três fases são substituídas por uma dummy para cada mês de Belém a partir
+de jul/2024. A trajetória dos coeficientes mostra antecipação, pico e dissipação; coeficientes antes de
+jul/2024 próximos de zero sustentam a hipótese de tendências paralelas.
+
+% ---------------------------------------------------------------------
+\section{Estimador 2: controle sintético}
+
+Seguindo Abadie, Diamond e Hainmueller (2010), o contrafactual é uma média ponderada das capitais de
+controle:
+\begin{equation}
+\hat Y_{\text{Bel},t}(0) = \sum_{j=1}^{J} w_j^{*}\, Y_{jt}, \qquad w_j \geq 0,\quad \sum_j w_j = 1,
+\end{equation}
+com os pesos $w^{*}$ escolhidos para reproduzir Belém de jan/2022 a jun/2024 em \var{emp\_idx} (em
+vários meses), no saldo médio e na participação de alojamento nas admissões. O efeito estimado é
+$\hat\tau_t = Y_{\text{Bel},t} - \hat Y_{\text{Bel},t}(0)$. Convertido em vagas, ele mede quantos
+empregos Belém teve a mais ou a menos que a sua versão sintética, acumulados até cada mês.
+
+% ---------------------------------------------------------------------
+\section{Inferência com uma unidade tratada}
+
+Com uma única unidade tratada, o erro-padrão agrupado por capital não é confiável e superestima a
+precisão (Conley e Taber, 2011; Bertrand, Duflo e Mullainathan, 2004). A inferência é feita por
+permutação:
+
+\begin{enumerate}[leftmargin=*]
+  \item Reestimar o modelo tratando cada capital de controle como se tivesse sediado a COP (excluindo
+        Belém da amostra nesses placebos).
+  \item Comparar o efeito de Belém com a distribuição dos 25 efeitos placebo.
+  \item p-valor $=$ proporção de unidades com efeito, em módulo, maior ou igual ao de Belém. Com 26
+        unidades, o 1º lugar corresponde a $p = 1/26 \approx 0{,}04$.
+  \item No controle sintético: razão entre o erro de previsão (RMSPE) depois e antes do tratamento,
+        para cada unidade (Abadie, Diamond e Hainmueller, 2010).
+\end{enumerate}
+
+% ---------------------------------------------------------------------
+\section{Hipóteses de identificação e testes}
+
+\begin{table}[H]
+\centering\small
+\begin{tabularx}{\linewidth}{p{3cm}LL}
+\toprule
+\textbf{Hipótese} & \textbf{O que exige} & \textbf{Teste}\\
+\midrule
+Tendências paralelas & Sem a COP, Belém seguiria as outras capitais, dada a sazonalidade & Estudo de evento antes de jul/2024 (Roth et al., 2023)\\
+Sem antecipação fora da janela & Nenhum efeito antes da preparação & Mover o início da preparação para datas anteriores\\
+SUTVA / sem contaminação & Controles não afetados pela COP nem por evento semelhante & Rio excluído; repetir sem cada doadora com peso alto\\
+Bom ajuste pré-tratamento & Belém sintética reproduz Belém real antes de jul/2024 & RMSPE pré-tratamento; gráfico das trajetórias (Abadie, 2021)\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\textbf{Robustez adicional:} janela de preparação curta (set--out/2025); resultado em nível
+(\var{saldo}) e por segmento (alojamento e alimentação separados); placebo no tempo (``evento'' falso em
+nov/2023); exclusão de capitais do Norte, que podem ter recebido turistas da COP.
+
+% ---------------------------------------------------------------------
+\section{Implementação em R}
+
+O script \texttt{03\_belem\_vs\_capitais.R} constrói o painel e estima os modelos. Trechos centrais:
+
+\begin{lstlisting}
+# Diferenças em diferenças por fase (pacote fixest)
+m <- feols(saldo_norm ~ B_prep + B_evento + B_desmob |
+             cap^mes_ano + competencia, data = did)
+
+# Controle sintético (pacote tidysynth)
+sc <- synthetic_control(dados, outcome = emp_idx, unit = cap, time = t,
+                        i_unit = "Belém", i_time = T0, generate_placebos = TRUE) |>
+  generate_predictor(time_window = 1:T0, saldo_medio = mean(saldo_norm)) |>
+  generate_weights(optimization_window = 1:T0) |>
+  generate_control()
+grab_significance(sc)   # razão de RMSPE e p-valor por permutação
+\end{lstlisting}
+
+% ---------------------------------------------------------------------
+\section{Resultados}
+
+\textit{A preencher após a execução do script 03.} As tabelas abaixo já estão no formato final.
+
+\begin{table}[H]
+\centering\small
+\begin{tabularx}{\linewidth}{Lccc}
+\toprule
+\textbf{Fase} & \textbf{Efeito (\% de um mês normal)} & \textbf{Efeito (vagas/mês)} & \textbf{p-valor placebo}\\
+\midrule
+Preparação & --- & --- & ---\\
+Evento & --- & --- & ---\\
+Desmobilização & --- & --- & ---\\
+\bottomrule
+\end{tabularx}\\[3pt]
+{\footnotesize Diferenças em diferenças com efeitos fixos de capital $\times$ mês do ano e de mês calendário; 26 unidades.}
+\end{table}
+
+\begin{table}[H]
+\centering\small
+\begin{tabularx}{\linewidth}{Lccc}
+\toprule
+\textbf{Controle sintético} & \textbf{Diferença média (vagas)} & \textbf{RMSPE pós/pré} & \textbf{Posição de Belém}\\
+\midrule
+Preparação & --- & \multirow{3}{*}{---} & \multirow{3}{*}{--- de 26}\\
+Evento & --- & & \\
+Desmobilização & --- & & \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\textbf{Evidência anterior (série temporal do Pará).} Sem grupo de controle, o efeito da
+desmobilização foi negativo em todas as especificações e significativo a 10\% apenas na RM de Belém
+($-181{,}9$ vagas por mês); no mês do evento, a hotelaria teve aumento significativo de contratações.
+O desenho em painel testa se esse padrão se mantém quando Belém é comparada com outras capitais.
+
+% ---------------------------------------------------------------------
+\section*{Referências}
+\begin{small}\setlength{\parindent}{0pt}\setlength{\parskip}{4pt}\raggedright
+
+ABADIE, A. Using synthetic controls: feasibility, data requirements, and methodological aspects. \textbf{Journal of Economic Literature}, v. 59, n. 2, p. 391-425, 2021.
+
+ABADIE, A.; DIAMOND, A.; HAINMUELLER, J. Synthetic control methods for comparative case studies: estimating the effect of California's tobacco control program. \textbf{Journal of the American Statistical Association}, v. 105, n. 490, p. 493-505, 2010.
+
+BERTRAND, M.; DUFLO, E.; MULLAINATHAN, S. How much should we trust differences-in-differences estimates? \textbf{The Quarterly Journal of Economics}, v. 119, n. 1, p. 249-275, 2004.
+
+BRONZINI, R.; MOCETTI, S.; MONGARDINI, M. \textbf{The economic effects of big events}: evidence from the Great Jubilee 2000 in Rome. Roma: Banca d'Italia, 2019. (Temi di discussione, n. 1208).
+
+CONLEY, T. G.; TABER, C. R. Inference with ``difference in differences'' with a small number of policy changes. \textbf{Review of Economics and Statistics}, v. 93, n. 1, p. 113-125, 2011.
+
+HAGN, F.; MAENNIG, W. Large sport events and unemployment: the case of the 2006 soccer World Cup in Germany. \textbf{Applied Economics}, v. 41, n. 25, p. 3295-3302, 2009.
+
+KOBIERECKI, M. M.; PIERZGALSKI, M. Sports mega-events and economic growth: a synthetic control approach. \textbf{Journal of Sports Economics}, v. 23, n. 5, p. 567-597, 2022.
+
+ROTH, J.; SANT'ANNA, P. H. C.; BILINSKI, A.; POE, J. What's trending in difference-in-differences? A synthesis of the recent econometrics literature. \textbf{Journal of Econometrics}, v. 235, n. 2, p. 2218-2244, 2023.
+\end{small}
+\end{document}

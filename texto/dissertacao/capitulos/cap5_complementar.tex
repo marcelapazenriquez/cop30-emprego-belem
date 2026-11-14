@@ -1,0 +1,233 @@
+\chapter{Evidência complementar: regressão com dummies de fase para o Pará}\label{cap:macro}
+
+Este capítulo complementa a estratégia principal da dissertação, o painel de capitais. Em vez de comparar Belém com outras capitais, acompanha o Pará ao longo do tempo e estima, por MQO, se o saldo de empregos nas fases da COP30 foi diferente do período de referência, descontados a sazonalidade, a tendência e o ciclo macroeconômico. O exercício é mais simples e não constrói um contrafactual, mas permite incorporar controles macroeconômicos que o painel absorve nos efeitos fixos.
+
+
+\noindent\fcolorbox{azul}{azulclaro}{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule}{
+\textbf{Variável:} saldo mensal de empregos formais (admissões $-$ desligamentos).
+\textbf{Setor:} Alojamento e Alimentação (CNAE 55 + 56), núcleo das atividades turísticas.
+\textbf{Recorte:} Pará e Região Metropolitana de Belém, jan/2021 a jul/2026 (67 meses).
+\textbf{Choque:} COP30, Belém, novembro de 2025.}}
+
+\section{Motivação e relevância}
+
+Governos disputam megaeventos com a promessa de gerar empregos, mas a evidência \textit{ex post}
+mostra efeitos pequenos, setoriais e temporários (Baade e Matheson, 2004; Hagn e Maennig, 2009;
+Feddersen e Maennig, 2013). Projeções \textit{ex ante} para o Brasil, como as da Copa de 2014,
+previam ganhos de emprego que estudos posteriores não confirmaram (Domingues, Betarelli Junior e
+Magalhães, 2011; Mattei e Mello, 2017). Mesmo quando o turismo reage, a reação é curta: as receitas de
+turismo internacional do Brasil subiram cerca de 50\% durante a Copa de 2014 e 28\% durante a Rio 2016,
+mas caíram logo em seguida, sem efeito remanescente dois meses depois (Meurer e Lins, 2018).
+
+A COP30 oferece um caso novo para essa discussão por três razões. É um evento \textbf{não esportivo},
+com público e perfil de gasto diferentes de uma Copa. Ocorreu em uma \textbf{cidade amazônica}, com
+infraestrutura hoteleira pequena e mais sensível a choques. E foi um \textbf{choque antecipado}: as
+empresas souberam com mais de um ano de antecedência, o que permite separar o efeito das
+expectativas do efeito da demanda realizada.
+
+\textbf{Relevância para a política pública:} o Brasil continuará a sediar grandes eventos
+justificados pela geração de empregos. Medir quanto desse emprego permanece depois do evento orienta
+a decisão de investir recursos públicos nesse tipo de estratégia.
+
+% ---------------------------------------------------------------------
+
+\section{Pergunta e hipóteses}
+
+\textbf{Pergunta:} o fim da COP30 esteve associado a uma redução do saldo mensal de empregos formais
+em Alojamento e Alimentação no Pará, controlados o ciclo econômico e a sazonalidade? Em que magnitude?
+
+\begin{enumerate}[label=\textbf{H\arabic*.}, leftmargin=*]
+  \item \textbf{Antecipação:} o saldo aumenta no período imediatamente anterior ao evento, porque as
+        empresas contratam pela demanda esperada.
+  \item \textbf{Desmobilização:} controlados o ciclo e a sazonalidade, o saldo após o evento fica abaixo
+        do período de referência.
+  \item \textbf{Concentração:} o efeito é maior na Região Metropolitana de Belém e no segmento de
+        alojamento, mais expostos ao choque.
+  \item \textbf{Transitoriedade:} o efeito se dissipa em poucos meses, sem mudança permanente no nível do
+        emprego (Feddersen e Maennig, 2013; Boto-García e Santana-Gallego, 2025).
+\end{enumerate}
+
+% ---------------------------------------------------------------------
+
+\section{Fundamentação macroeconômica}
+
+\begin{itemize}
+  \item \textbf{Demanda derivada:} a demanda por trabalho deriva da demanda pelo serviço (Hicks, 1932).
+        O megaevento é um choque regional e temporário de demanda agregada sobre um setor não
+        comercializável.
+  \item \textbf{Expectativas:} como o evento foi anunciado com antecedência, as contratações reagem à
+        demanda esperada, e não só à observada. Isso gera antecipação antes do evento e ajuste depois.
+  \item \textbf{Ajuste gradual:} em hotéis e restaurantes, o emprego se ajusta à demanda com defasagem e
+        de forma incompleta (Alemayehu e Tveteraas, 2020).
+  \item \textbf{Sensibilidade ao ciclo:} a rotatividade na hospitalidade é a mais sensível ao ciclo da
+        economia (Dogru et al., 2023), por isso o ciclo precisa ser controlado.
+  \item \textbf{Legado e composição setorial:} no Jubileu de 2000, o emprego de Roma cresceu em setores
+        de baixa produtividade, sem efeito no valor adicionado per capita (Bronzini, Mocetti e
+        Mongardini, 2019).
+\end{itemize}
+
+% ---------------------------------------------------------------------
+
+\section{Como a literatura aplicada mede choques de turismo}
+
+A literatura recente trata o turismo e os megaeventos como \textbf{choques de demanda locais e
+temporários} e os mede em três níveis: chegadas de visitantes, receitas e emprego. A Tabela~\ref{tab:literatura}
+resume os estudos que orientam este capítulo.
+
+\begin{table}[H]
+\centering\footnotesize
+\caption{Estudos aplicados que medem choques de turismo e megaeventos}\label{tab:literatura}
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{3.1cm}>{\raggedright\arraybackslash}p{2.4cm}>{\raggedright\arraybackslash}p{2.8cm}L}
+\toprule
+\textbf{Estudo} & \textbf{Choque} & \textbf{Variável e método} & \textbf{Resultado}\\
+\midrule
+Faber e Gaubert (2019), \textit{American Economic Review} & Turismo no litoral do México & Emprego e renda municipal; variação geográfica & Ganhos locais grandes, em parte compensados em escala nacional\\
+Fourie e Santana-Gallego (2011), \textit{Tourism Management} & Megaeventos esportivos & Chegadas de turistas; painel gravitacional & Aumento de chegadas, com \textit{crowding out} de turistas regulares\\
+Baumann e Matheson (2018), \textit{Contemporary Economic Policy} & Copa de 2014 no Brasil & Chegadas mensais por país; DiD & Cerca de 1 milhão de chegadas extras, concentradas em dois meses\\
+Meurer e Lins (2018), \textit{Tourism Economics} & Copa de 2014 e Rio 2016 & Receitas mensais de turismo internacional & Alta imediata, sem efeito dois meses depois\\
+Leoni e Boto-García (2023), \textit{Environmental and Resource Economics} & Erupção em La Palma (2021) & Contratações mensais em hospitalidade; DiD & Queda nas contratações hoteleiras durante o choque\\
+Boto-García e Santana-Gallego (2025), \textit{Tourism Management} & Olimpíadas e Copas & Emprego em serviços; DiD com adoção escalonada & Antecipação antes do evento, sem efeito persistente\\
+Billings e Holladay (2012), \textit{Economic Inquiry} & Olimpíadas & Renda e população de longo prazo & Sem efeito de longo prazo nas cidades-sede\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Três lições orientam o modelo. Primeiro, os efeitos aparecem em \textbf{dados mensais} e somem em dados
+anuais (Meurer e Lins, 2018; Feddersen e Maennig, 2013). Segundo, o choque precisa ser separado da
+\textbf{sazonalidade} do setor (Krakover, 2000) e do \textbf{ciclo econômico} (Dogru et al., 2023), o que
+justifica as dummies de mês e o índice de serviços. Terceiro, choques temporários sobre a hotelaria
+aparecem primeiro nas \textbf{contratações} (Leoni e Boto-García, 2023), o que justifica analisar
+admissões e desligamentos, e não apenas o estoque. A literatura de efeitos de longo prazo (Rose e
+Spiegel, 2011; Billings e Holladay, 2012) indica que um eventual legado deve ser procurado em outras
+variáveis, como infraestrutura e imagem da cidade, e não no emprego de curto prazo.
+
+% ---------------------------------------------------------------------
+
+\section{Base de dados}
+
+A base foi construída a partir de microdados, e não de dados ``de prateleira'', porque as séries
+prontas não têm o recorte mensal, setorial e municipal que a literatura exige.
+
+\begin{table}[H]
+\centering\small
+\begin{tabularx}{\linewidth}{p{3.3cm}Lp{2.6cm}p{1.9cm}}
+\toprule
+\textbf{Variável} & \textbf{Definição} & \textbf{Fonte} & \textbf{Situação}\\
+\midrule
+\var{saldo} & Admissões $-$ desligamentos, CNAE 55 + 56, Pará & Novo CAGED (microdados) & Na base\\
+\var{saldo\_rmb} & O mesmo, só na RM de Belém & Novo CAGED & Na base\\
+\var{saldo\_55}, \var{saldo\_56} & Alojamento e Alimentação separados & Novo CAGED & Na base\\
+\var{ln\_ivs} & Log do índice de volume de serviços do Pará (2022 = 100) & PMS/IBGE, tab.\ 5906 & Na base\\
+\var{cambio} & Variação do câmbio real/dólar & BCB-SGS & A coletar\\
+\var{ipca\_bel} & Inflação mensal da RM de Belém & IBGE/SIDRA & A coletar\\
+\var{exp\_ipca} & Expectativa de inflação 12 meses à frente & Boletim Focus (BCB) & A coletar\\
+\var{selic} & Taxa Selic & BCB-SGS & A coletar\\
+\var{D\_prep}, \var{D\_evento}, \var{D\_desmob} & Fases: jul/24--out/25; nov/25; dez/25--jul/26 & Construção própria & Na base\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\textbf{Janela e regime.} Assim como a mudança de regime de 1999 torna desatualizadas as análises
+com séries anteriores, a migração do CAGED para o eSocial em 2020 quebrou a comparabilidade da série
+(IPEA, 2020). Por isso a janela começa em jan/2021, e a recuperação da pandemia é controlada por uma
+variável indicadora para 2021. A série tem 67 observações mensais, acima da regra prática de 60.
+
+\textbf{Câmbio e expectativas.} O câmbio afeta a demanda de turistas estrangeiros e o custo de viajar
+para fora; a expectativa de inflação capta o ambiente macroeconômico em que as empresas decidem
+contratar. As duas séries são públicas e mensais.
+
+% ---------------------------------------------------------------------
+
+\section{Modelo}
+
+O modelo é uma regressão por mínimos quadrados ordinários (MQO), com uma observação por mês, variáveis
+indicadoras de fase, controles macroeconômicos e sazonalidade:
+\begin{equation}
+y_t = \alpha + \sum_{m=1}^{11}\delta_m M_{mt} + \theta\, t + \gamma' X_t
+      + \beta_P\, Prep_t + \beta_E\, Evento_t + \beta_D\, Desmob_t + \varepsilon_t
+\end{equation}
+em que $y_t$ é o saldo mensal, $M_{mt}$ são dummies de mês (dezembro como referência), $t$ é a
+tendência e $X_t$ reúne \var{ln\_ivs}, câmbio, inflação de Belém e expectativa de inflação. O
+coeficiente de interesse é $\beta_D$: a mudança média no saldo mensal na desmobilização, dados o
+ciclo e a sazonalidade. Como meses vizinhos tendem a ter choques parecidos, os erros-padrão são de Newey e West (1987),
+robustos a heteroscedasticidade e autocorrelação.
+
+\textbf{Por que não um painel dinâmico estimado por GMM.} Modelos com a variável dependente defasada
+estimados por GMM (Arellano e Bond, 1991; Arellano e Bover, 1995; Blundell e Bond, 1998) corrigem o viés
+de Nickell (1981), que surge quando efeitos fixos e defasagens convivem em painéis curtos. São adequados
+quando há muitas unidades e poucos períodos. Os dados desta pesquisa têm o formato oposto: no painel de
+capitais, 27 unidades e 67 meses. Com $T$ grande, o viés de Nickell, de ordem $1/T$, é pequeno; e o
+número de instrumentos ultrapassaria rapidamente o número de grupos, o que invalida o teste de Hansen.
+Por isso, a persistência do saldo é tratada com efeitos fixos e erros-padrão robustos à autocorrelação.
+
+\textbf{Por que o modelo é inédito, replicável e robusto:}
+\begin{itemize}
+  \item \textbf{Inédito:} primeira avaliação \textit{ex post} do efeito de uma conferência climática
+        sobre o emprego local, com fases que separam antecipação e desmobilização.
+  \item \textbf{Replicável:} todos os dados são públicos e a base é gerada por um script em R que baixa
+        e processa os microdados do zero.
+  \item \textbf{Robusto:} o resultado é testado em várias especificações (seção~\ref{sec:robustez}).
+\end{itemize}
+
+% ---------------------------------------------------------------------
+
+\section{Robustez}\label{sec:robustez}
+
+\begin{enumerate}[leftmargin=*]
+  \item Com e sem cada bloco de controles (ciclo, câmbio, expectativas).
+  \item Índice de serviços defasado, para evitar que o controle absorva o próprio efeito.
+  \item Recortes: Pará, RM de Belém, Alojamento e Alimentação separados.
+  \item Janela de preparação curta (set--out/2025) contra a longa (jul/2024--out/2025).
+  \item Placebo no tempo: a mesma especificação com um ``evento'' falso em novembro de 2023.
+  \item Sazonalidade por termos de Fourier, para economizar parâmetros.
+  \item Outubro a dezembro como bloco, por causa do Círio colado na COP: em 2025, temporários do Círio
+        podem ter sido mantidos até a conferência e desligados só em dezembro.
+  \item Dummy para novembro de 2024 (Conferência Amazônia e Novas Economias).
+\end{enumerate}
+
+% ---------------------------------------------------------------------
+
+\section{Resultados preliminares}
+
+Os resultados abaixo vêm da primeira versão do modelo, ainda sem câmbio e expectativas.
+
+\begin{table}[H]
+\centering\small
+\begin{tabularx}{\linewidth}{Lcc}
+\toprule
+\textbf{Especificação} & \textbf{Desmobilização} & \textbf{Evento}\\
+\midrule
+(1) Original, dummy de 2026 & $-97{,}4$ \;(60,6) & ---\\
+(2) Fases + sazonalidade & $-83{,}5$ \;(72,4) & $150{,}0$ \;(152,2)\\
+(3) + tendência (principal) & $-120{,}8$ \;(182,1) & $129{,}3$ \;(228,3)\\
+(4) Sem índice de serviços & $-76{,}4$ \;(163,9) & $133{,}7$ \;(226,1)\\
+(5a) Só Alojamento & $-70{,}8$ \;(61,8) & $116{,}0^{*}$ \;(63,4)\\
+(5b) Só Alimentação & $-49{,}9$ \;(151,0) & $13{,}3$ \;(189,9)\\
+(5c) RM de Belém & $-181{,}9^{*}$ \;(99,9) & $33{,}0$ \;(112,1)\\
+\bottomrule
+\end{tabularx}\\[3pt]
+{\footnotesize Coeficientes em vagas por mês; erros-padrão Newey-West entre parênteses; $^{*}$ $p<0{,}10$; 67 meses.}
+\end{table}
+
+\begin{itemize}
+  \item O efeito da desmobilização é \textbf{negativo em todas as especificações}, mas só é
+        significativo na RM de Belém, onde o evento ocorreu.
+  \item No mês do evento, a \textbf{hotelaria contratou mais} (significativo a 10\%).
+  \item Descritivamente, o saldo acumulado de dezembro a julho caiu de $+1.554$ (2023--24) e $+1.127$
+        (2024--25) para $+797$ (2025--26): houve \textbf{desaceleração, e não destruição líquida} de vagas.
+\end{itemize}
+
+% ---------------------------------------------------------------------
+
+\section{Próximos passos}
+
+\begin{enumerate}[leftmargin=*]
+  \item Coletar câmbio, Selic e IPCA no BCB-SGS e a expectativa de inflação no Focus (pacote
+        \texttt{rbcb} no R), e o IPCA de Belém no SIDRA.
+  \item Reestimar o modelo completo e as seis checagens de robustez.
+  \item Atualizar a literatura 2023--2026 no Scopus e confirmar a ausência de estudos \textit{ex post}
+        sobre conferências climáticas.
+\end{enumerate}
+
+% ---------------------------------------------------------------------
+
