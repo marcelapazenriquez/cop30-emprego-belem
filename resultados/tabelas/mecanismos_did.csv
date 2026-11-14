@@ -1,0 +1,55 @@
+setor,resultado,variavel,fase,efeito,p_simples,p_ponderado,unidades
+Alimentação (56),Admissões por prazo determinado,adm_prazo_norm,prep,0.006,0.962,0.923,26
+Alimentação (56),Admissões por prazo determinado,adm_prazo_norm,evento,0.012,0.962,0.923,26
+Alimentação (56),Admissões por prazo determinado,adm_prazo_norm,desmob,0.008,0.962,0.923,26
+Alimentação (56),Demais admissões,adm_outras_norm,prep,11.462,0.192,0.346,26
+Alimentação (56),Demais admissões,adm_outras_norm,evento,50.071,0.038,0.038,26
+Alimentação (56),Demais admissões,adm_outras_norm,desmob,23.024,0.231,0.231,26
+Alimentação (56),Desligamentos por término de contrato,fim_contr_norm,prep,1.893,0.269,0.308,26
+Alimentação (56),Desligamentos por término de contrato,fim_contr_norm,evento,14.217,0.038,0.038,26
+Alimentação (56),Desligamentos por término de contrato,fim_contr_norm,desmob,6.001,0.077,0.192,26
+Alimentação (56),Demais desligamentos,desl_outros_norm,prep,6.305,0.423,0.385,26
+Alimentação (56),Demais desligamentos,desl_outros_norm,evento,18.609,0.077,0.077,26
+Alimentação (56),Demais desligamentos,desl_outros_norm,desmob,17.518,0.192,0.192,26
+Alimentação (56),Admissões intermitentes,adm_interm_norm,prep,0.036,0.885,0.923,26
+Alimentação (56),Admissões intermitentes,adm_interm_norm,evento,0.761,0.5,0.538,26
+Alimentação (56),Admissões intermitentes,adm_interm_norm,desmob,0.998,0.269,0.231,26
+Alimentação (56),Log do salário de admissão,ln_sal,prep,-0.009,0.577,0.577,26
+Alimentação (56),Log do salário de admissão,ln_sal,evento,0.066,0.038,0.038,26
+Alimentação (56),Log do salário de admissão,ln_sal,desmob,-0.007,0.654,0.654,26
+Alojamento (55),Admissões por prazo determinado,adm_prazo_norm,prep,,,,0
+Alojamento (55),Admissões por prazo determinado,adm_prazo_norm,evento,,,,0
+Alojamento (55),Admissões por prazo determinado,adm_prazo_norm,desmob,,,,0
+Alojamento (55),Demais admissões,adm_outras_norm,prep,54.111,0.038,0.038,26
+Alojamento (55),Demais admissões,adm_outras_norm,evento,293.807,0.038,0.038,26
+Alojamento (55),Demais admissões,adm_outras_norm,desmob,24.366,0.231,0.346,26
+Alojamento (55),Desligamentos por término de contrato,fim_contr_norm,prep,2.874,0.231,0.192,26
+Alojamento (55),Desligamentos por término de contrato,fim_contr_norm,evento,97.261,0.038,0.038,26
+Alojamento (55),Desligamentos por término de contrato,fim_contr_norm,desmob,10.069,0.077,0.077,26
+Alojamento (55),Demais desligamentos,desl_outros_norm,prep,13.508,0.154,0.154,26
+Alojamento (55),Demais desligamentos,desl_outros_norm,evento,78.568,0.038,0.038,26
+Alojamento (55),Demais desligamentos,desl_outros_norm,desmob,58.808,0.038,0.038,26
+Alojamento (55),Admissões intermitentes,adm_interm_norm,prep,0.691,0.077,0.269,26
+Alojamento (55),Admissões intermitentes,adm_interm_norm,evento,-0.068,0.962,0.808,26
+Alojamento (55),Admissões intermitentes,adm_interm_norm,desmob,-0.07,0.731,0.731,26
+Alojamento (55),Log do salário de admissão,ln_sal,prep,0.04,0.038,0.038,26
+Alojamento (55),Log do salário de admissão,ln_sal,evento,0.145,0.038,0.038,26
+Alojamento (55),Log do salário de admissão,ln_sal,desmob,0.059,0.077,0.077,26
+Alojamento + Alimentação,Admissões por prazo determinado,adm_prazo_norm,prep,0.005,0.962,0.923,26
+Alojamento + Alimentação,Admissões por prazo determinado,adm_prazo_norm,evento,0.01,0.962,0.923,26
+Alojamento + Alimentação,Admissões por prazo determinado,adm_prazo_norm,desmob,0.007,0.962,0.923,26
+Alojamento + Alimentação,Demais admissões,adm_outras_norm,prep,15.706,0.077,0.231,26
+Alojamento + Alimentação,Demais admissões,adm_outras_norm,evento,74.929,0.038,0.038,26
+Alojamento + Alimentação,Demais admissões,adm_outras_norm,desmob,22.934,0.115,0.231,26
+Alojamento + Alimentação,Desligamentos por término de contrato,fim_contr_norm,prep,1.96,0.269,0.269,26
+Alojamento + Alimentação,Desligamentos por término de contrato,fim_contr_norm,evento,22.86,0.038,0.038,26
+Alojamento + Alimentação,Desligamentos por término de contrato,fim_contr_norm,desmob,6.382,0.077,0.192,26
+Alojamento + Alimentação,Demais desligamentos,desl_outros_norm,prep,6.973,0.346,0.385,26
+Alojamento + Alimentação,Demais desligamentos,desl_outros_norm,evento,24.742,0.077,0.038,26
+Alojamento + Alimentação,Demais desligamentos,desl_outros_norm,desmob,21.734,0.077,0.077,26
+Alojamento + Alimentação,Admissões intermitentes,adm_interm_norm,prep,0.117,0.731,0.846,26
+Alojamento + Alimentação,Admissões intermitentes,adm_interm_norm,evento,0.695,0.5,0.5,26
+Alojamento + Alimentação,Admissões intermitentes,adm_interm_norm,desmob,0.911,0.269,0.269,26
+Alojamento + Alimentação,Log do salário de admissão,ln_sal,prep,-0.001,0.962,0.962,26
+Alojamento + Alimentação,Log do salário de admissão,ln_sal,evento,0.086,0.038,0.038,26
+Alojamento + Alimentação,Log do salário de admissão,ln_sal,desmob,0.001,0.962,0.962,26
