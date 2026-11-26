@@ -6,7 +6,8 @@
 
 if (!file.exists("cop30.Rproj")) stop("abra o projeto cop30.Rproj antes de rodar")
 
-scripts <- c("R/02_modelos_para.R", "R/03_capitais.R", "R/04_mecanismos.R")
+scripts <- c("R/02_modelos_para.R", "R/03_capitais.R", "R/04_mecanismos.R",
+             "R/05_precos.R", "R/06_figuras_extra.R")
 if (!file.exists("dados/processados/base_cop30_para.csv")) scripts <- c("R/01_base_para.R", scripts)
 
 for (s in scripts) {

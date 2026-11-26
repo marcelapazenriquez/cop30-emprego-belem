@@ -27,12 +27,16 @@ Fases:
 
 ## Pastas
 
+    layout_caged.xlsx        dicionário de variáveis do Novo CAGED (layout do MTE/PDET)
+
     R/
-      00_rodar_tudo.R        roda 01 (se preciso), 02, 03 e 04 em ordem
+      00_rodar_tudo.R        roda 01 (se preciso) e depois 02 a 06, em ordem
       01_base_para.R         baixa o CAGED, monta a série do Pará e o índice de volume de serviços
       02_modelos_para.R      painel de municípios do Pará, modelos A, B e C, placebo, estudo de evento, ADF
       03_capitais.R          Belém x capitais: DiD com placebo, robustez, estudo de evento, controle sintético
       04_mecanismos.R        tipo de vínculo (prazo determinado, intermitente) e salário de admissão
+      05_precos.R            modelo C: inflação da RM de Belém menos a do Brasil, por item do IPCA
+      06_figuras_extra.R     faixa das capitais placebo e dispersão (alojamento); rodar depois do 03
       funcoes.R              funções auxiliares usadas pelos scripts
       antigos/               versões anteriores (caminhos fixos no meu computador, só para registro)
     dados/
@@ -107,8 +111,20 @@ capitais (o menor possível é 1/26 = 0,038).
   término de contrato no alojamento, e o salário de admissão na alimentação
   fica cerca de 7% acima (p = 0,038).
 
+Preços (IPCA, RM de Belém menos Brasil, variação mensal em %):
+
+    item                            nov/2025 Belém   Brasil   diferença
+    Hospedagem                          178,9         4,1      174,8
+    Alimentação fora do domicílio         1,2         0,5        0,8
+    Índice geral                          0,1         0,2       -0,1
+
+- A hospedagem em Belém quase triplicou de preço no mês da COP30: a diferença
+  em relação ao Brasil foi a maior de toda a série (p = 0,018 no teste contra os
+  outros meses) e se desfez já em dezembro. No índice geral não há efeito.
+
 Fontes: `resultados/tabelas/capitais_did.csv`, `capitais_acumulado.csv`,
-`mecanismos_did.csv`. Resultados em revisão, sujeitos a mudança.
+`mecanismos_did.csv`, `precos_por_fase.csv`, `precos_teste_nov2025.csv`.
+Resultados em revisão, sujeitos a mudança.
 
 
 ## Fontes
@@ -117,6 +133,9 @@ Fontes: `resultados/tabelas/capitais_did.csv`, `capitais_acumulado.csv`,
   arquivos MOV + FOR - EXC, por mês de competência.
 - Pesquisa Mensal de Serviços, IBGE, tabela 5906: https://sidra.ibge.gov.br/tabela/5906
 - IPCA por item, IBGE, tabela 7060: https://sidra.ibge.gov.br/tabela/7060
+  variação mensal (%), RM de Belém e Brasil, itens Hospedagem, Alimentação fora do
+  domicílio, Aluguel residencial e Índice geral, jan/2022 a jul/2026 (baixada ano a ano
+  pelo `05_precos.R`, porque a tabela inteira passa do limite do SIDRA).
 - Banco Central, SGS (https://www3.bcb.gov.br/sgspub): câmbio 3698, Selic 4390, IPCA 433, IBC-Br 24364.
 
 
