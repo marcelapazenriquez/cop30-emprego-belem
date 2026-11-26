@@ -1,6 +1,9 @@
 # COP30 e emprego formal em Belém
 
-Dissertação de mestrado em Economia (PPGE/UFF). Marcela Paz da Silva Enriquez.
+Paper de mestrado em Economia (PPGE/UFF), Marcela Paz da Silva Enriquez: trabalho para
+Macroeconomia e Finanças (Prof. Helder Ferreira de Mendonça) e Microeconometria.
+Foi o primeiro tema da dissertação, que depois passou a ser otimização de portfólio
+de commodities com risco climático; os rascunhos antigos ficam em `texto/dissertacao/`.
 
 Pergunta: a COP30 (Belém, novembro de 2025) mudou o emprego formal em
 alojamento e alimentação (CNAE 55 e 56) em Belém, e o efeito ficou depois
@@ -50,7 +53,7 @@ Fases:
       paper_helder/          artigo para Macroeconomia e Finanças (Prof. Helder Ferreira de Mendonça)
       atividade4/            métodos, Seminário de Dissertação
       resumo_seminario/      resumo para o Seminário de Dissertação
-      dissertacao/           rascunho dos capítulos
+      dissertacao/           rascunho dos capítulos (do tema anterior da dissertação)
       notas/                 notas de planejamento
 
 
