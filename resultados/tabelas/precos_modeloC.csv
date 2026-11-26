@@ -1,0 +1,13 @@
+item,fase,efeito_pp,erro_padrao,t
+Alimentação fora do domicílio,prep,-0.141,0.113,-1.25
+Alimentação fora do domicílio,evento,0.386,0.149,2.59
+Alimentação fora do domicílio,desmob,-0.119,0.087,-1.37
+Aluguel residencial,prep,0.134,0.316,0.42
+Aluguel residencial,evento,0.621,0.306,2.03
+Aluguel residencial,desmob,-0.006,0.298,-0.02
+Hospedagem,prep,-0.112,1.695,-0.07
+Hospedagem,evento,176.053,1.225,143.72
+Hospedagem,desmob,-9.555,6.113,-1.56
+Índice geral,prep,-0.006,0.049,-0.12
+Índice geral,evento,0.055,0.1,0.55
+Índice geral,desmob,-0.047,0.072,-0.65

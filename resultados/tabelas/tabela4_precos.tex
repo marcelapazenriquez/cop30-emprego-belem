@@ -1,0 +1,27 @@
+\begin{table}
+\centering
+\begin{talltblr}[         %% tabularray outer open
+caption={Modelo C: inflação mensal da RM de Belém menos a do Brasil (p.p.), por item do IPCA},
+note{}={* p \num{< 0.1}, ** p \num{< 0.05}, *** p \num{< 0.01}},
+note{ }={MQO com dummies de mês; erros-padrão de Newey-West entre parênteses.},
+]                     %% tabularray outer close
+{                     %% tabularray inner open
+colspec={Q[]Q[]Q[]Q[]Q[]},
+hline{2}={1-5}{solid, black, 0.05em},
+hline{8}={1-5}{solid, black, 0.05em},
+hline{1}={1-5}{solid, black, 0.08em},
+hline{10}={1-5}{solid, black, 0.08em},
+column{2-5}={}{halign=c},
+column{1}={}{halign=l},
+}                     %% tabularray inner close
+& Alimentação fora do domicílio & Aluguel residencial & Hospedagem & Índice geral \\
+Preparação & \num{-0.141} & \num{0.134} & \num{-0.112} & \num{-0.006} \\
+& (\num{0.113}) & (\num{0.316}) & (\num{1.695}) & (\num{0.049}) \\
+Evento (nov/2025) & \num{0.386}** & \num{0.621}** & \num{176.053}*** & \num{0.055} \\
+& (\num{0.149}) & (\num{0.306}) & (\num{1.225}) & (\num{0.100}) \\
+Desmobilização & \num{-0.119} & \num{-0.006} & \num{-9.555} & \num{-0.047} \\
+& (\num{0.087}) & (\num{0.298}) & (\num{6.113}) & (\num{0.072}) \\
+Num.Obs. & \num{55} & \num{55} & \num{55} & \num{55} \\
+R2 & \num{0.321} & \num{0.128} & \num{0.921} & \num{0.190} \\
+\end{talltblr}
+\end{table}

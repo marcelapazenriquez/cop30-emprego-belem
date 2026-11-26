@@ -167,10 +167,10 @@ estimar <- function(d, y = "saldo_norm", fases = FASES, excluir = character(0),
     fase = names(fases),
     efeito = sapply(names(fases), function(f) round(bel[[paste0("B_", f)]], 2)),
     p_simples = sapply(names(fases), function(f) { b <- paste0("B_", f)
-      round(mean(abs(res[[b]]) >= abs(bel[[b]]), na.rm = TRUE), 3) }),
+    round(mean(abs(res[[b]]) >= abs(bel[[b]]), na.rm = TRUE), 3) }),
     p_ponderado = sapply(names(fases), function(f) { b <- paste0("B_", f)
-      z <- res[[b]] / res$sd_ref; zb <- bel[[b]] / bel$sd_ref
-      round(mean(abs(z) >= abs(zb), na.rm = TRUE), 3) }),
+    z <- res[[b]] / res$sd_ref; zb <- bel[[b]] / bel$sd_ref
+    round(mean(abs(z) >= abs(zb), na.rm = TRUE), 3) }),
     capitais = nrow(res))
 }
 did <- rbind(estimar(base, "saldo_norm")[, setor := "Alojamento + Alimentação"],
@@ -184,13 +184,13 @@ specs <- list(
   "Janela curta (prep set-out/25)" = list(fases = list(prep = c("2025-09-01", "2025-10-01"),
                                                        evento = FASES$evento, desmob = FASES$desmob)),
   "Out-dez em bloco"              = list(fases = list(prep = c("2024-07-01", "2025-09-01"),
-                                                       evento = c("2025-10-01", "2025-12-01"),
-                                                       desmob = c("2026-01-01", "2026-07-01"))),
+                                                      evento = c("2025-10-01", "2025-12-01"),
+                                                      desmob = c("2026-01-01", "2026-07-01"))),
   "Sem capitais do Norte"         = list(excluir = NORTE),
   "Sem nov/2024 em Belém"         = list(tirar_belem = "2024-11-01"),
   "Placebo no tempo (-2 anos)"    = list(fases = list(prep = c("2022-07-01", "2023-10-01"),
-                                                       evento = c("2023-11-01", "2023-11-01"),
-                                                       desmob = c("2023-12-01", "2024-06-01")),
+                                                      evento = c("2023-11-01", "2023-11-01"),
+                                                      desmob = c("2023-12-01", "2024-06-01")),
                                          ate = "2024-06-01"))
 rob <- rbindlist(lapply(names(specs), function(nm) {
   s <- specs[[nm]]
@@ -267,14 +267,32 @@ rodar_sc <- function(col_idx, col_saldo, sufixo) {
     generate_predictor(time_window = T0, idx_T0 = idx) |>
     generate_weights(optimization_window = 1:T0) |>
     generate_control()
-  ggsave(file.path(FIG, paste0("capitais_sc_trajetoria", sufixo, ".png")), plot_trends(sc),
-         width = 9, height = 4.5, dpi = 200)
   fwrite(as.data.table(grab_unit_weights(sc))[order(-weight)],
          file.path(TAB, paste0("capitais_sc_pesos", sufixo, ".csv")))
   sig <- as.data.table(grab_significance(sc))[unit_name == TRATADA]
   serie <- as.data.table(grab_synthetic_control(sc))
   serie <- merge(serie, unique(sc_dt[, .(t, competencia)]), by.x = "time_unit", by.y = "t")
   serie[, gap := real_y - synth_y]                        # Belem menos Belem sintetica (estoque)
+  fwrite(serie, file.path(PROC, paste0("capitais_sc_serie", sufixo, ".csv")))
+  # figura: Belem observada x Belem sintetica (os pesos de cada capital estao em capitais_sc_pesos)
+  g <- ggplot(melt(serie, id.vars = "competencia", measure.vars = c("real_y", "synth_y")),
+              aes(competencia, value, linetype = variable)) +
+    annotate("rect", xmin = as.Date(FASES$prep[1]), xmax = as.Date(FASES$evento[1]),
+             ymin = -Inf, ymax = Inf, fill = "grey92") +
+    geom_vline(xintercept = as.Date(FASES$evento[1]), linetype = 3) +
+    geom_line() +
+    scale_linetype_manual(values = c(real_y = 1, synth_y = 2),
+                          labels = c(real_y = "Belém", synth_y = "Belém sintética")) +
+    labs(x = NULL, y = "Saldo acumulado desde jan/2022 (% de um mês normal)", linetype = NULL,
+         caption = paste0("Fonte: Novo CAGED (MTE), ftp://ftp.mtps.gov.br/pdet/microdados/NOVO%20CAGED/ - ",
+                          "arquivos MOV + FOR - EXC, CNAE 55 e 56, 26 capitais (exceto Rio de Janeiro), somados por ",
+                          "capital e mês de competência;\nsaldo acumulado desde jan/2022 dividido pela média de ",
+                          "admissões de jan/2022 a jun/2024. Belém sintética: média ponderada das outras capitais, com ",
+                          "pesos escolhidos\npara reproduzir Belém de jan/2022 a jun/2024 (pacote tidysynth). ",
+                          "Faixa: preparação; linha pontilhada: nov/2025.")) +
+    theme_minimal() + theme(legend.position = "bottom", plot.caption = element_text(hjust = 0, size = 7))
+  ggsave(file.path(FIG, paste0("capitais_sc_trajetoria", sufixo, ".png")), g,
+         width = 9, height = 4.8, dpi = 200)
   serie[, dgap := gap - shift(gap)]                       # diferenca mensal (fluxo)
   for (f in names(FASES)) {
     lim <- as.Date(FASES[[f]]); serie[competencia >= lim[1] & competencia <= lim[2], fase := f]
