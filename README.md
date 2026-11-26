@@ -28,9 +28,12 @@ Fases:
 ## Pastas
 
     R/
+      00_rodar_tudo.R        roda 01 (se preciso), 02, 03 e 04 em ordem
       01_base_para.R         baixa o CAGED, monta a série do Pará e o índice de volume de serviços
       02_modelos_para.R      painel de municípios do Pará, modelos A, B e C, placebo, estudo de evento, ADF
       03_capitais.R          Belém x capitais: DiD com placebo, robustez, estudo de evento, controle sintético
+      04_mecanismos.R        tipo de vínculo (prazo determinado, intermitente) e salário de admissão
+      funcoes.R              funções auxiliares usadas pelos scripts
       antigos/               versões anteriores (caminhos fixos no meu computador, só para registro)
     dados/
       brutos/                arquivos .7z do Novo CAGED (não vão para o GitHub)
@@ -81,7 +84,31 @@ Selic em variação e acrescenta o modelo C, o estudo de evento e o ADF.
 Rodar o 02 sobrescreve esses arquivos. O modelo B e o placebo são iguais
 nas duas versões.
 
-Ainda faltam os resultados das capitais (saem do 03).
+Os resultados das capitais (`capitais_*.csv` e figuras) saem do `03_capitais.R`
+e os de mecanismos (`mecanismos_*.csv`, `mecanismos_belem.png`) do `04_mecanismos.R`.
+
+
+## Resultados preliminares (Belém x 25 capitais, alojamento + alimentação)
+
+Efeito medido em pontos do saldo normalizado (saldo do mês como % da média
+mensal de admissões de referência); p-valor pelo placebo entre as 26
+capitais (o menor possível é 1/26 = 0,038).
+
+    fase             efeito    p (placebo)
+    preparação         6,8      0,077
+    evento (nov/25)   27,3      0,038
+    desmobilização    -5,2      0,231
+
+- Efeito acumulado até nov/2025: cerca de 1.060 vagas formais a mais em Belém
+  (p = 0,077 simples; 0,038 ponderado). Em jul/2026 o acumulado cai para cerca
+  de 690 vagas e deixa de ser significativo (p = 0,154).
+- O efeito se concentra em alojamento (CNAE 55): +118 pontos no mês do evento.
+- Mecanismos: no mês do evento, sobem as admissões e os desligamentos por
+  término de contrato no alojamento, e o salário de admissão na alimentação
+  fica cerca de 7% acima (p = 0,038).
+
+Fontes: `resultados/tabelas/capitais_did.csv`, `capitais_acumulado.csv`,
+`mecanismos_did.csv`. Resultados em revisão, sujeitos a mudança.
 
 
 ## Fontes
